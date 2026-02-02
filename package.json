@@ -8,8 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "predeploy": "VITE_APP_GOOGLE_API_KEY=$VITE_APP_GOOGLE_API_KEY npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "VITE_APP_GOOGLE_API_KEY=$VITE_APP_GOOGLE_API_KEY gh-pages -d dist"
   },
   "dependencies": {
     "firebase": "^12.8.0",
