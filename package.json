@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "VITE_APP_GOOGLE_API_KEY=$VITE_APP_GOOGLE_API_KEY npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
