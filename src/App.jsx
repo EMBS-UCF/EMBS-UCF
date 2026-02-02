@@ -473,26 +473,26 @@ const App = () => {
                     name: "Discord",
                     icon: MessageSquare,
                     color: "bg-[#5865F2]",
-                    link: "#",
+                    link: "https://discord.gg/GXjTNuCvka",
                   },
                   {
                     name: "LinkedIn",
                     icon: Linkedin,
                     color: "bg-[#0077b5]",
-                    link: "#",
+                    link: "https://www.linkedin.com/company/ieee-embs-ucf/",
                   },
                   {
                     name: "Instagram",
                     icon: Instagram,
                     color:
                       "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600",
-                    link: "#",
+                    link: "https://www.instagram.com/embs.ucf?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
                   },
                   {
                     name: "GitHub",
                     icon: Github,
                     color: "bg-slate-900",
-                    link: "#",
+                    link: "https://www.github.com/embs-ucf",
                   },
                 ].map((social, idx) => (
                   <a
