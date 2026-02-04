@@ -148,7 +148,7 @@ export const PROJECTS = [
   {
     title: "Oxygen Concentrator",
     status: "active",
-    desc: "Building a medical-grade oxygen concentrator from scratch to aid in respiratory research and application.",
+    desc: "Building a oxygen concentrator from scratch to provide experience in creating medical machinery.",
     meeting: "Mondays, 4:30 PM - 6:00 PM | TCH 238",
     img: ASSETS.PROJECT_PLACEHOLDER,
   },
@@ -170,7 +170,7 @@ export const PROJECTS = [
   {
     title: "UCF x UF Sensor Competition",
     status: "past",
-    desc: "An inter-collegiate competition where teams designed and prototyped medical sensors to compete in a club comp.",
+    desc: "An inter-collegiate competition where teams designed and prototyped medical sensors to compete.",
     completed: "Fall 2025",
     img: `${ASSET_BASE_URL}/sensor_comp.png`,
   },
