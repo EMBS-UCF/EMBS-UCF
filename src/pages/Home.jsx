@@ -37,7 +37,7 @@ const Home = () => {
         <img
           src={ASSETS.LOGO_URL}
           alt="EMBS Logo"
-          className="h-64 w-64 md:h-96 md:w-96 mt-12 md:mt-0 object-contain drop-shadow-[0_20px_50px_rgba(30,58,138,0.5)]"
+          className="h-64 w-64 md:h-96 md:w-96 mt-12 md:mt-0 object-contain drop-shadow-[0_20px_50px_rgba(30,58,138,0.5)] rounded-2xl"
         />
       </section>
 

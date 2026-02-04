@@ -8,9 +8,11 @@ import {
   Loader2,
 } from "lucide-react";
 import { CALENDAR_CONFIG } from "../constants";
+import CountdownClock from "../components/CountdownClock";
 
 const Events = () => {
   const [gbmEvents, setGbmEvents] = useState([]);
+  const [nextEventRaw, setNextEventRaw] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,35 +27,47 @@ const Events = () => {
 
       try {
         const now = new Date().toISOString();
-        const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(ID)}/events?key=${API_KEY}&timeMin=${now}&singleEvents=true&orderBy=startTime`;
+        const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
+          ID,
+        )}/events?key=${API_KEY}&timeMin=${now}&singleEvents=true&orderBy=startTime`;
 
         const res = await fetch(url);
         const data = await res.json();
 
         if (data.items) {
-          const filtered = data.items
-            .filter((item) =>
-              item.summary?.toUpperCase().includes(FILTER_KEYWORD),
-            )
-            .slice(0, MAX_GBMS)
-            .map((item) => ({
-              title: item.summary,
-              date: new Date(
-                item.start.dateTime || item.start.date,
-              ).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              }),
-              time: item.start.dateTime
-                ? new Date(item.start.dateTime).toLocaleTimeString("en-US", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })
-                : "All Day",
-              loc: item.location || "TBA",
-            }));
-          setGbmEvents(filtered);
+          // Filter for GBMs specifically
+          const filtered = data.items.filter((item) =>
+            item.summary?.toUpperCase().includes(FILTER_KEYWORD),
+          );
+
+          // 1. Set data for the Countdown Clock (first upcoming GBM)
+          if (filtered.length > 0) {
+            setNextEventRaw({
+              title: filtered[0].summary,
+              start: filtered[0].start.dateTime || filtered[0].start.date,
+            });
+          }
+
+          // 2. Format the list for the GBM Grid (limit to MAX_GBMS)
+          const formatted = filtered.slice(0, MAX_GBMS).map((item) => ({
+            title: item.summary,
+            date: new Date(
+              item.start.dateTime || item.start.date,
+            ).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            }),
+            time: item.start.dateTime
+              ? new Date(item.start.dateTime).toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : "All Day",
+            loc: item.location || "TBA",
+          }));
+
+          setGbmEvents(formatted);
         }
       } catch (err) {
         console.error("Error fetching calendar:", err);
@@ -67,7 +81,13 @@ const Events = () => {
 
   return (
     <div className="space-y-16 animate-in fade-in duration-500">
-      {/* Interactive Calendar Section */}
+      {!loading && nextEventRaw && (
+        <CountdownClock
+          targetDate={nextEventRaw.start}
+          eventTitle={nextEventRaw.title}
+        />
+      )}
+
       <div className="space-y-6">
         <h2 className="text-4xl font-extrabold text-blue-900">
           Events Calendar
@@ -81,7 +101,6 @@ const Events = () => {
         </div>
       </div>
 
-      {/* Featured GBM Section */}
       <div className="space-y-8">
         <div className="flex items-center space-x-3">
           <Layout className="text-blue-600" size={32} />

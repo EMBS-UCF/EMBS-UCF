@@ -7,6 +7,7 @@ import {
   Linkedin,
   Instagram,
   Github,
+  FolderCode,
 } from "lucide-react";
 
 const ASSET_BASE_URL = "https://assets.embsucf.org";
@@ -14,6 +15,8 @@ const ASSET_BASE_URL = "https://assets.embsucf.org";
 export const ASSETS = {
   LOGO_URL: `${ASSET_BASE_URL}/logo.png`,
   FALLBACK_OFFICER: `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y`,
+  PROJECT_PLACEHOLDER:
+    "https://placehold.co/800x450/1e3a8a/ffffff?text=Project+Coming+Soon",
   FEATURES: {
     INSIGHT: `${ASSET_BASE_URL}/insight.jpg`,
     TECHNICAL: `${ASSET_BASE_URL}/technical.jpg`,
@@ -118,6 +121,7 @@ export const OFFICERS = [
 export const NAV_LINKS = [
   { path: "/", label: "Home", icon: Home },
   { path: "/officers", label: "Officers", icon: Users },
+  { path: "/projects", label: "Projects", icon: FolderCode },
   { path: "/events", label: "Events", icon: Calendar },
   { path: "/contact", label: "Contact", icon: Mail },
 ];
@@ -137,5 +141,37 @@ export const HOME_FEATURES = [
     title: "Professional Foundation",
     desc: "As a chapter of the world’s largest biomedical engineering society, we connect you to a massive international community and exclusive professional resources.",
     img: ASSETS.FEATURES.PROFESSIONAL,
+  },
+];
+
+export const PROJECTS = [
+  {
+    title: "Oxygen Concentrator",
+    status: "active",
+    desc: "Building a medical-grade oxygen concentrator from scratch to aid in respiratory research and application.",
+    meeting: "Mondays, 4:30 PM - 6:00 PM | TCH 238",
+    img: ASSETS.PROJECT_PLACEHOLDER,
+  },
+  {
+    title: "EEG Cryptography",
+    status: "active",
+    desc: "A research initiative developing cryptographic methodology to generate reliable hash keys from live EEG data for use as a biometric authenticator.",
+    meeting: "TBA",
+    img: ASSETS.PROJECT_PLACEHOLDER,
+  },
+
+  {
+    title: "Sole Pressure Sensor",
+    status: "past",
+    desc: "Developed a custom Force Sensitive Resistor (FSR) array to detect stance and gait abnormalities.",
+    completed: "Fall 2025",
+    img: `${ASSET_BASE_URL}/sole_pressure.jpg`,
+  },
+  {
+    title: "UCF x UF Sensor Competition",
+    status: "past",
+    desc: "An inter-collegiate competition where teams designed and prototyped medical sensors to compete in a club comp.",
+    completed: "Fall 2025",
+    img: `${ASSET_BASE_URL}/sensor_comp.png`,
   },
 ];
