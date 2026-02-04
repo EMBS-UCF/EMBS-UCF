@@ -77,7 +77,7 @@ export const OFFICERS = [
   {
     name: "Eren Siegman",
     role: "President",
-    major: "Computer Engineering",
+    major: "Computer Science",
     image: `${ASSET_BASE_URL}/eren.jpg`,
   },
   {
