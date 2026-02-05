@@ -9,7 +9,7 @@ import Projects from "./pages/Projects";
 
 const App = () => {
   return (
-    <Router basename="/EMBS-UCF">
+    <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
