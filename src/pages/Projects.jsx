@@ -1,9 +1,16 @@
 import React from "react";
-import { History, Rocket, Clock, CheckCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import {
+  History,
+  Rocket,
+  Clock,
+  CheckCircle,
+  ArrowRight,
+} from "lucide-react";
 import { PROJECTS } from "../constants";
 
 const ProjectCard = ({ project }) => (
-  <div className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+  <div className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col h-full relative">
     <div className="h-48 overflow-hidden bg-slate-200">
       <img
         src={project.img}
@@ -39,18 +46,22 @@ const ProjectCard = ({ project }) => (
 );
 
 const Projects = () => {
+  const navigate = useNavigate();
   const activeProjects = PROJECTS.filter((p) => p.status === "active");
   const pastProjects = PROJECTS.filter((p) => p.status === "past");
 
   return (
     <div className="space-y-24 animate-in fade-in duration-500">
       <div className="text-center max-w-2xl mx-auto space-y-4">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-blue-900">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-600">
+          Build, test, and iterate
+        </p>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900">
           Our Projects
-        </h2>
+        </h1>
         <p className="text-slate-600 text-lg">
-          Explore our current research initiatives and past engineering
-          milestones.
+          Explore the teams driving our current biomedical work and the projects
+          that shaped our chapter.
         </p>
       </div>
 
@@ -67,6 +78,13 @@ const Projects = () => {
             <ProjectCard key={i} project={p} />
           ))}
         </div>
+        <button
+          onClick={() => navigate("/contact")}
+          className="mx-auto flex items-center gap-2 text-blue-700 font-bold hover:text-blue-900 transition-colors"
+        >
+          <span>Want to join a project? Reach out on the contact page.</span>
+          <ArrowRight size={18} />
+        </button>
       </section>
 
       {/* Past Projects Section */}

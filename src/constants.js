@@ -16,7 +16,7 @@ export const ASSETS = {
   LOGO_URL: `${ASSET_BASE_URL}/logo.png`,
   FALLBACK_OFFICER: `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y`,
   PROJECT_PLACEHOLDER:
-    "https://placehold.co/800x450/1e3a8a/ffffff?text=Project+Coming+Soon",
+    "https://placehold.co/800x450/1e3a8a/ffffff?text=No+Image",
   FEATURES: {
     INSIGHT: `${ASSET_BASE_URL}/insight.jpg`,
     TECHNICAL: `${ASSET_BASE_URL}/technical.jpg`,
@@ -27,6 +27,8 @@ export const ASSETS = {
 export const ORG_INFO = {
   NAME: "IEEE EMBS",
   CHAPTER: "UCF CHAPTER",
+  TAGLINE: "Engineering and medicine, built together at UCF.",
+  LOCATION: "Orlando, FL",
   EMAIL: "ieee.embs.ucf@gmail.com",
   SOCIALS: {
     DISCORD: "https://discord.gg/GXjTNuCvka",
@@ -79,42 +81,49 @@ export const OFFICERS = [
     role: "President",
     major: "Computer Science",
     image: `${ASSET_BASE_URL}/eren.jpg`,
+    linkedin: "https://www.linkedin.com/in/eren-siegman/",
   },
   {
     name: "Megan Laffey",
     role: "Vice President",
     major: "Mechanical Engineering",
     image: `${ASSET_BASE_URL}/megan.jpg`,
+    linkedin: "https://www.linkedin.com/in/megan-laffey/",
   },
   {
     name: "Rachel Ostrow",
     role: "Treasurer",
     major: "Photonics Engineering",
     image: `${ASSET_BASE_URL}/rachel.jpg`,
+    linkedin: "https://www.linkedin.com/in/rachel-ostrow-006b2a32a/",
   },
   {
     name: "Erin Weidel",
     role: "Secretary",
     major: "Electrical Engineering",
     image: `${ASSET_BASE_URL}/erin.png`,
+    linkedin: "https://www.linkedin.com/in/erinweidel/",
   },
   {
     name: "Samuel Lane",
     role: "Workshop Chair",
     major: "Electrical Engineering",
     image: `${ASSET_BASE_URL}/samuel.jpg`,
+    linkedin: "",
   },
   {
     name: "Louis Cosentini",
     role: "Project Chair",
     major: "Electrical Engineering",
     image: `${ASSET_BASE_URL}/louis.jpg`,
+    linkedin: "https://www.linkedin.com/in/louis-cosentini-15717829b/",
   },
   {
     name: "Aidan Cobb",
     role: "Outreach Chair",
     major: "Mechanical Engineering",
     image: `${ASSET_BASE_URL}/aidan.jpg`,
+    linkedin: "",
   },
 ];
 
@@ -126,21 +135,60 @@ export const NAV_LINKS = [
   { path: "/contact", label: "Contact", icon: Mail },
 ];
 
+export const RESOURCE_SECTIONS = [
+  {
+    title: "Biomedical-Related Courses",
+    description:
+      "Reference list of courses relevant to biomedical engineering topics.",
+    links: [
+      { label: "Signal processing", href: "#" },
+      { label: "Embedded systems", href: "#" },
+      { label: "Control systems", href: "#" },
+      { label: "Biomechanics", href: "#" },
+      { label: "Medical imaging", href: "#" },
+    ],
+  },
+  {
+    title: "Scholarships",
+    description: "Scholarship opportunities from IEEE, UCF, and external programs.",
+    links: [
+      { label: "IEEE scholarship opportunities", href: "#" },
+      { label: "UCF scholarship portal", href: "#" },
+      { label: "STEM and research funding", href: "#" },
+    ],
+  },
+  {
+    title: "Professional Opportunities",
+    description: "Internships, research roles, and career preparation resources.",
+    links: [
+      { label: "Biomedical internship boards", href: "#" },
+      { label: "Research opportunity listings", href: "#" },
+      { label: "Resume and interview prep", href: "#" },
+    ],
+  },
+];
+
 export const HOME_FEATURES = [
   {
     title: "Industry & Academic Insight",
     desc: "We host guest lectures from UCF faculty and industry leaders to provide a direct look into groundbreaking research and the medical device marketplace.",
     img: ASSETS.FEATURES.INSIGHT,
+    ctaLabel: "See upcoming talks",
+    path: "/events",
   },
   {
     title: "Technical Mastery",
     desc: "Gain hands-on experience through student-led technical projects and skill-building workshops designed to bridge the gap between classroom theory and real-world application.",
     img: ASSETS.FEATURES.TECHNICAL,
+    ctaLabel: "Explore project teams",
+    path: "/projects",
   },
   {
     title: "Professional Foundation",
     desc: "As a chapter of the world’s largest biomedical engineering society, we connect you to a massive international community and exclusive professional resources.",
     img: ASSETS.FEATURES.PROFESSIONAL,
+    ctaLabel: "Meet chapter leadership",
+    path: "/officers",
   },
 ];
 
@@ -148,16 +196,30 @@ export const PROJECTS = [
   {
     title: "Oxygen Concentrator",
     status: "active",
-    desc: "Building a oxygen concentrator from scratch to provide experience in creating medical machinery.",
+    desc: "The Ox-Con build is officially underway. Members are designing and assembling a student-built oxygen concentrator while learning systems integration and medical hardware fundamentals.",
     meeting: "Mondays, 4:30 PM - 6:00 PM | TCH 238",
+    img: ASSETS.PROJECT_PLACEHOLDER,
+  },
+  {
+    title: "EEG From Scratch",
+    status: "active",
+    desc: "A new project focused on building an EEG acquisition stack from the ground up, from signal capture hardware to clean software pipelines.",
+    meeting: "Starting soon",
     img: ASSETS.PROJECT_PLACEHOLDER,
   },
   {
     title: "EEG Cryptography",
     status: "active",
-    desc: "A research initiative developing cryptographic methodology to generate reliable hash keys from live EEG data for use as a biometric authenticator.",
+    desc: "A research initiative exploring reliable cryptographic key generation from EEG biometrics. Detailed scope and schedule are still TBA.",
     meeting: "TBA",
     img: ASSETS.PROJECT_PLACEHOLDER,
+  },
+  {
+    title: "UCF x UF x FIT Sensor Competition",
+    status: "active",
+    desc: "An inter-collegiate sensor design competition hosted once each semester (Fall and Spring) with teams from UCF, UF, and FIT.",
+    meeting: "Recurring each Fall & Spring semester",
+    img: `${ASSET_BASE_URL}/sensor_comp.png`,
   },
 
   {
@@ -166,12 +228,5 @@ export const PROJECTS = [
     desc: "Developed a custom Force Sensitive Resistor (FSR) array to detect stance and gait abnormalities.",
     completed: "Fall 2025",
     img: `${ASSET_BASE_URL}/sole_pressure.jpg`,
-  },
-  {
-    title: "UCF x UF Sensor Competition",
-    status: "past",
-    desc: "An inter-collegiate competition where teams designed and prototyped medical sensors to compete.",
-    completed: "Fall 2025",
-    img: `${ASSET_BASE_URL}/sensor_comp.png`,
   },
 ];

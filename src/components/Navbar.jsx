@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Layout as LayoutIcon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ASSETS, ORG_INFO, NAV_LINKS } from "../constants";
 
 const Navbar = () => {
@@ -11,12 +11,17 @@ const Navbar = () => {
   const inactiveStyle = "text-gray-600 hover:bg-gray-100";
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-md border-b border-slate-200">
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
         {/* Branding / Logo */}
         <div
           className="flex items-center space-x-3 cursor-pointer"
           onClick={() => navigate("/")}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") navigate("/");
+          }}
         >
           <img
             src={ASSETS.LOGO_URL}
@@ -55,9 +60,10 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             className="p-2 text-gray-600 hover:text-blue-600 transition-colors"
           >
-            <LayoutIcon size={24} />
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>

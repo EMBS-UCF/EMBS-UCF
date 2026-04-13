@@ -1,4 +1,5 @@
 import React from "react";
+import { Linkedin } from "lucide-react";
 import { OFFICERS, ASSETS } from "../constants";
 
 const Officers = () => {
@@ -6,9 +7,9 @@ const Officers = () => {
     <div className="space-y-12 animate-in fade-in duration-500">
       {/* Header Section */}
       <div className="text-center max-w-2xl mx-auto space-y-4">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-blue-900">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900">
           The Executive Board
-        </h2>
+        </h1>
         <p className="text-slate-600 text-lg">
           Meet the students leading IEEE EMBS at UCF for the 2025-2026 year.
         </p>
@@ -49,6 +50,23 @@ const Officers = () => {
               <p className="text-xs text-slate-400 mt-3 tracking-widest uppercase font-medium">
                 {o.major}
               </p>
+              <a
+                href={o.linkedin || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled={!o.linkedin}
+                onClick={(e) => {
+                  if (!o.linkedin) e.preventDefault();
+                }}
+                className={`mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-black uppercase tracking-wider transition-colors ${
+                  o.linkedin
+                    ? "bg-[#0077b5] text-white hover:bg-[#006299]"
+                    : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                }`}
+              >
+                <Linkedin size={14} />
+                LinkedIn
+              </a>
             </div>
           </div>
         ))}

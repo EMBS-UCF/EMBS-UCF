@@ -6,21 +6,28 @@ import {
   Users,
   Layout,
   Loader2,
+  ArrowRight,
+  Bell,
+  Handshake,
+  FlaskConical,
 } from "lucide-react";
-import { CALENDAR_CONFIG } from "../constants";
+import { CALENDAR_CONFIG, ORG_INFO } from "../constants";
 import CountdownClock from "../components/CountdownClock";
 
 const Events = () => {
   const [gbmEvents, setGbmEvents] = useState([]);
   const [nextEventRaw, setNextEventRaw] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [calendarNotice, setCalendarNotice] = useState("");
 
   useEffect(() => {
     const fetchEvents = async () => {
       const { API_KEY, ID, FILTER_KEYWORD, MAX_GBMS } = CALENDAR_CONFIG;
 
       if (!API_KEY) {
-        console.warn("Google API Key is missing. GBM cards will not load.");
+        setCalendarNotice(
+          "Live GBM cards are temporarily unavailable because the calendar API key is not configured.",
+        );
         setLoading(false);
         return;
       }
@@ -71,6 +78,9 @@ const Events = () => {
         }
       } catch (err) {
         console.error("Error fetching calendar:", err);
+        setCalendarNotice(
+          "We couldn't load live GBM data right now. Please use the full calendar below.",
+        );
       } finally {
         setLoading(false);
       }
@@ -80,7 +90,78 @@ const Events = () => {
   }, []);
 
   return (
-    <div className="space-y-16 animate-in fade-in duration-500">
+    <div className="space-y-20 animate-in fade-in duration-500">
+      <section className="rounded-3xl bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 text-white p-8 md:p-12 shadow-2xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-4">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-200">
+              Chapter events
+            </p>
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+              Stay in sync with EMBS
+            </h1>
+            <p className="text-lg text-blue-100 max-w-2xl">
+              Use the live calendar to track meetings, workshops, and chapter
+              activities, then check GBM snapshots below for quick planning.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a
+                href={ORG_INFO.SOCIALS.DISCORD}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-white text-blue-900 px-5 py-2.5 font-bold hover:bg-blue-50 transition-colors"
+              >
+                Join Discord
+                <ArrowRight size={16} />
+              </a>
+              <a
+                href={ORG_INFO.SOCIALS.INSTAGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-blue-200/60 px-5 py-2.5 font-bold hover:bg-white/10 transition-colors"
+              >
+                Follow updates
+              </a>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-3">
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4">
+              <div className="flex items-center gap-2 text-blue-100">
+                <Bell size={18} />
+                <p className="text-xs font-black uppercase tracking-[0.15em]">
+                  General body meetings
+                </p>
+              </div>
+              <p className="text-sm text-white/90 mt-2">
+                Core chapter updates, speaker sessions, and upcoming opportunities.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4">
+              <div className="flex items-center gap-2 text-blue-100">
+                <FlaskConical size={18} />
+                <p className="text-xs font-black uppercase tracking-[0.15em]">
+                  Technical workshops
+                </p>
+              </div>
+              <p className="text-sm text-white/90 mt-2">
+                Hands-on sessions and project-focused build time.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4">
+              <div className="flex items-center gap-2 text-blue-100">
+                <Handshake size={18} />
+                <p className="text-xs font-black uppercase tracking-[0.15em]">
+                  Community events
+                </p>
+              </div>
+              <p className="text-sm text-white/90 mt-2">
+                Outreach, competitions, and chapter collaborations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {!loading && nextEventRaw && (
         <CountdownClock
           targetDate={nextEventRaw.start}
@@ -92,6 +173,10 @@ const Events = () => {
         <h2 className="text-4xl font-extrabold text-blue-900">
           Events Calendar
         </h2>
+        <p className="text-slate-600 text-lg max-w-3xl">
+          This is the master schedule for chapter activities. For the fastest
+          view, add it to your personal calendar and keep notifications on.
+        </p>
         <div className="bg-white p-2 rounded-3xl shadow-xl border border-slate-100 overflow-hidden aspect-video min-h-[500px]">
           <iframe
             src={CALENDAR_CONFIG.getEMBED_URL(CALENDAR_CONFIG.ID)}
@@ -108,6 +193,9 @@ const Events = () => {
             Upcoming GBMs
           </h3>
         </div>
+        <p className="text-slate-500">
+          Pulled from the live calendar and filtered to GBM events.
+        </p>
 
         {loading ? (
           <div className="flex flex-col items-center py-24 text-blue-600 bg-white rounded-3xl border border-slate-100 shadow-sm">
@@ -115,6 +203,10 @@ const Events = () => {
             <p className="text-slate-500 font-medium">
               Syncing live schedule from Google...
             </p>
+          </div>
+        ) : calendarNotice ? (
+          <div className="text-center py-12 px-6 bg-white rounded-3xl border-2 border-dashed border-slate-200">
+            <p className="text-slate-500 text-lg">{calendarNotice}</p>
           </div>
         ) : gbmEvents.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
