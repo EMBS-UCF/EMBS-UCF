@@ -127,6 +127,14 @@ export const OFFICERS = [
   },
 ];
 
+export const FACULTY_ADVISOR = {
+  name: "Dr. Di Wu",
+  role: "Faculty Advisor",
+  major: "Department of Electrical and Computer Engineering",
+  image: `${ASSET_BASE_URL}/di_wu.jpg`,
+  linkedin: "https://www.linkedin.com/in/diwu1990/",
+};
+
 export const NAV_LINKS = [
   { path: "/", label: "Home", icon: Home },
   { path: "/officers", label: "Officers", icon: Users },
