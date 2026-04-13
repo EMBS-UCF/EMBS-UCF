@@ -14,12 +14,12 @@ import { ASSETS, CALENDAR_CONFIG, HOME_FEATURES, ORG_INFO } from "../constants";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [nextEvent, setNextEvent] = useState(null);
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [eventLoading, setEventLoading] = useState(true);
   const [eventNotice, setEventNotice] = useState("");
 
   useEffect(() => {
-    const fetchNextEvent = async () => {
+    const fetchUpcomingEvents = async () => {
       const { API_KEY, ID } = CALENDAR_CONFIG;
 
       if (!API_KEY) {
@@ -32,46 +32,50 @@ const Home = () => {
         const now = new Date().toISOString();
         const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
           ID,
-        )}/events?key=${API_KEY}&timeMin=${now}&singleEvents=true&orderBy=startTime&maxResults=1`;
+        )}/events?key=${API_KEY}&timeMin=${now}&singleEvents=true&orderBy=startTime&maxResults=3`;
 
         const res = await fetch(url);
         const data = await res.json();
-        const first = data.items?.[0];
+        const items = data.items?.filter((item) => item.start) || [];
 
-        if (!first?.start) {
+        if (items.length === 0) {
           setEventNotice("No upcoming events are scheduled right now.");
           setEventLoading(false);
           return;
         }
 
-        const rawStart = first.start.dateTime || first.start.date;
-        const startDate = new Date(rawStart);
-        const isAllDay = !first.start.dateTime;
+        setUpcomingEvents(
+          items.map((item) => {
+            const rawStart = item.start.dateTime || item.start.date;
+            const startDate = new Date(rawStart);
+            const isAllDay = !item.start.dateTime;
 
-        setNextEvent({
-          title: first.summary || "Upcoming Event",
-          date: startDate.toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          }),
-          time: isAllDay
-            ? "All Day"
-            : startDate.toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
+            return {
+              title: item.summary || "Upcoming Event",
+              date: startDate.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
               }),
-          location: first.location || "Location TBA",
-        });
+              time: isAllDay
+                ? "All Day"
+                : startDate.toLocaleTimeString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }),
+              location: item.location || "Location TBA",
+            };
+          }),
+        );
       } catch (error) {
-        console.error("Failed to fetch next event:", error);
-        setEventNotice("Couldn't load the upcoming event right now.");
+        console.error("Failed to fetch upcoming events:", error);
+        setEventNotice("Couldn't load upcoming events right now.");
       } finally {
         setEventLoading(false);
       }
     };
 
-    fetchNextEvent();
+    fetchUpcomingEvents();
   }, []);
 
   const growthPath = [
@@ -139,7 +143,7 @@ const Home = () => {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div className="space-y-2">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-600">
-              Upcoming event
+              Upcoming events
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">
               Next on the chapter calendar
@@ -156,24 +160,29 @@ const Home = () => {
 
         <div className="mt-6 rounded-2xl border border-slate-100 bg-slate-50 p-6">
           {eventLoading ? (
-            <p className="text-slate-500">Loading upcoming event...</p>
-          ) : nextEvent ? (
-            <div className="space-y-3">
-              <h3 className="text-2xl font-bold text-blue-900">{nextEvent.title}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-slate-600">
-                <p className="inline-flex items-center gap-2">
-                  <CalendarDays size={16} className="text-blue-600" />
-                  {nextEvent.date}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <Clock3 size={16} className="text-blue-600" />
-                  {nextEvent.time}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <MapPin size={16} className="text-blue-600" />
-                  {nextEvent.location}
-                </p>
-              </div>
+            <p className="text-slate-500">Loading upcoming events...</p>
+          ) : upcomingEvents.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              {upcomingEvents.map((event, index) => (
+                <div
+                  key={`${event.title}-${event.date}-${index}`}
+                  className="rounded-xl border border-slate-200 bg-white p-4 space-y-2"
+                >
+                  <h3 className="text-lg font-bold text-blue-900">{event.title}</h3>
+                  <p className="inline-flex items-center gap-2 text-slate-600">
+                    <CalendarDays size={16} className="text-blue-600" />
+                    {event.date}
+                  </p>
+                  <p className="inline-flex items-center gap-2 text-slate-600">
+                    <Clock3 size={16} className="text-blue-600" />
+                    {event.time}
+                  </p>
+                  <p className="inline-flex items-center gap-2 text-slate-600">
+                    <MapPin size={16} className="text-blue-600" />
+                    {event.location}
+                  </p>
+                </div>
+              ))}
             </div>
           ) : (
             <p className="text-slate-500">{eventNotice}</p>
