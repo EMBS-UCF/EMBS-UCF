@@ -18,26 +18,30 @@ interface SlideshowProps {
 /**
  * Photo slideshow for the home page.
  *
- * Auto-advancing content has to be stoppable to meet WCAG 2.2.2, so there is a
- * real pause control rather than only pause-on-hover — a keyboard user who
- * never hovers still needs a way to stop it. It also holds still by default
- * under prefers-reduced-motion, and pauses when the tab is hidden so a
- * backgrounded page is not decoding images for nobody.
+ * It always advances on its own. Two things it deliberately does not do:
+ *
+ * - It does not pause on hover. Hovering is how people read a photo, and
+ *   stopping there makes a working slideshow look broken.
+ * - It does not stop under prefers-reduced-motion. That preference is about
+ *   animation, not about content changing, so the cross-fade is dropped for an
+ *   instant cut instead and the rotation continues.
+ *
+ * It does pause while something inside has keyboard focus, so a keyboard user
+ * is not yanked to another slide mid-interaction, and while the tab is hidden.
+ * The explicit pause button is what satisfies WCAG 2.2.2.
  *
  * The first slide renders eagerly; the rest are lazy. Every slide stays in the
  * DOM and is cross-faded, which keeps the height stable and avoids a reflow on
  * each advance.
  */
-export function Slideshow({ slides, interval = 5000, className }: SlideshowProps) {
+export function Slideshow({ slides, interval = 4500, className }: SlideshowProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(true);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const count = slides.length;
 
-  // Starts true so the server render and first client render agree; the real
-  // preference is read after mount.
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => setReducedMotion(media.matches);
@@ -51,7 +55,7 @@ export function Slideshow({ slides, interval = 5000, className }: SlideshowProps
     [count],
   );
 
-  const advancing = !paused && !reducedMotion && count > 1;
+  const advancing = !paused && count > 1;
 
   useEffect(() => {
     if (!advancing) return;
@@ -93,8 +97,6 @@ export function Slideshow({ slides, interval = 5000, className }: SlideshowProps
       role="group"
       aria-roledescription="carousel"
       aria-label="Photographs of the chapter"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node)) setPaused(false);
@@ -106,7 +108,9 @@ export function Slideshow({ slides, interval = 5000, className }: SlideshowProps
           <figure
             key={slide.src}
             className={cn(
-              "absolute inset-0 transition-opacity duration-700 ease-[var(--ease-out-expo)]",
+              "absolute inset-0 transition-opacity ease-[var(--ease-out-expo)]",
+              // Reduced motion keeps the rotation but drops the fade.
+              reducedMotion ? "duration-0" : "duration-700",
               i === index ? "opacity-100" : "opacity-0",
             )}
             aria-hidden={i === index ? undefined : true}
