@@ -32,9 +32,22 @@ says the calendar is not connected.
 
 Under **Settings → Variables and secrets**, for both Production and Preview:
 
-| Name | Value |
-| --- | --- |
-| `VITE_GOOGLE_API_KEY` | Your Google Calendar API key |
+| Name | Value | Type |
+| --- | --- | --- |
+| `VITE_GOOGLE_API_KEY` | Your Google Calendar API key | **Plaintext, not Secret** |
+
+**Add it as a plaintext variable. Do not click Encrypt.** Cloudflare's
+encrypted secrets are a binding for Pages *Functions* and are only readable at
+runtime through `context.env`; they are never exposed to the build. Vite
+substitutes `import.meta.env.VITE_GOOGLE_API_KEY` while bundling, so a secret
+is invisible to it and the site deploys successfully with the calendar showing
+as disconnected — no error anywhere.
+
+Encrypting it would not protect anything in any case. Every `VITE_`-prefixed
+value is compiled into the public JavaScript by design. This is a
+referrer-restricted browser key; being readable is its normal condition. The
+protection is the referrer restriction in the Google Cloud console, not the
+storage type here.
 
 Delete `VITE_APP_GOOGLE_API_KEY` and `VITE_APP_GOOGLE_CALENDAR_ID` once the new
 one works. The calendar ID is no longer an environment variable — it is set in
