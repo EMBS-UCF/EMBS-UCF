@@ -51,8 +51,13 @@ collections:
         hint: >-
           This is the entire description of the project on the site — there are
           no individual project pages, so it has to stand on its own. Two or
-          three sentences, under 400 characters. Be specific about what the team
-          actually does.
+          three sentences, under 400 characters.
+
+          Write it for somebody deciding whether to turn up, not for somebody
+          already on the team. Say what the thing does in plain words and what
+          you would learn by working on it. Skip the component names and the
+          numbers — "a device that picks up brain activity through the scalp"
+          lands; "instrumentation amplifier, filter stages, ADC" does not.
 
       - name: order
         label: Display order

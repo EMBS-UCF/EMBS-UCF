@@ -1,6 +1,6 @@
 ---
 title: EEG From Scratch
-summary: The whole EEG acquisition chain, built in the open — electrodes, instrumentation amplifier, filter stages, ADC, and the software that turns microvolts into a plot. Scalp signals sit around 10–100 µV, so most of the work is a fight against noise.
+summary: Building a device that picks up brain activity through the scalp, start to finish, instead of buying one off the shelf. Good for learning circuit design, signal processing, and the software side of turning a very faint signal into something readable.
 meeting: Sessions are on the chapter calendar
 cover: ""
 order: 2
