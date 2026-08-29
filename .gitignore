@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .env
+
+# Local environment overrides. The real values live in Cloudflare Pages.
+.env.local
+.env.*.local

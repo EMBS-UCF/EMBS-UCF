@@ -1,0 +1,72 @@
+export interface CtaLink {
+  label: string;
+  href: string;
+}
+
+export interface Person {
+  slug: string;
+  name: string;
+  role: string;
+  /** Officers carry a major; advisors carry a department. */
+  detail: string;
+  photo: string;
+  linkedin: string;
+  order: number;
+}
+
+export interface Project {
+  slug: string;
+  title: string;
+  summary: string;
+  meeting: string;
+  cover: string;
+  order: number;
+}
+
+export interface ResourceItem {
+  label: string;
+  note: string;
+  /** Empty for entries that are not links — course areas, for instance. */
+  href: string;
+}
+
+export interface ResourceSection {
+  slug: string;
+  title: string;
+  description: string;
+  order: number;
+  items: ResourceItem[];
+}
+
+export interface SiteSettings {
+  name: string;
+  chapter: string;
+  shortName: string;
+  fullName: string;
+  tagline: string;
+  location: string;
+  campus: string;
+  /** Year the chapter was chartered. */
+  founded: string;
+  email: string;
+  url: string;
+  assetBase: string;
+  logo: string;
+  socials: {
+    discord: string;
+    linkedin: string;
+    instagram: string;
+    github: string;
+  };
+  calendar: {
+    id: string;
+    timezone: string;
+    gbmKeyword: string;
+    maxUpcoming: number;
+  };
+}
+
+export interface SeoMeta {
+  title: string;
+  description: string;
+}

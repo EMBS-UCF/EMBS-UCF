@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>Edit the EMBS site</title>
+  </head>
+  <body>
+    <!--
+      Sveltia CMS. Everything an officer sees at /admin is rendered by this
+      one script, driven by config.yml sitting next to this file.
+
+      Saving in the CMS commits to the GitHub repository, which triggers a
+      Cloudflare Pages build. Nothing here talks to the live site directly,
+      so a bad edit fails the build instead of breaking what is deployed.
+    -->
+    <script src="https://unpkg.com/@sveltia/cms@0.111.0/dist/sveltia-cms.js"></script>
+
+    <!--
+      Signpost for local development in a non-Chromium browser.
+
+      The "Work with Local Repository" button needs the File System Access
+      API, which only Chromium implements. Sveltia greys it out and says to
+      use Chrome, which is a dead end if you do not know that /admin/preview/
+      exists. This adds that missing pointer.
+
+      Only ever runs on localhost, so it cannot appear on the live site.
+    -->
+    <script>
+      (function () {
+        var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+        if (!local || typeof window.showDirectoryPicker === "function") return;
+
+        document.addEventListener("DOMContentLoaded", function () {
+          var bar = document.createElement("div");
+          bar.setAttribute("role", "note");
+          bar.style.cssText = [
+            "position:fixed", "inset:0 0 auto 0", "z-index:2147483647",
+            "padding:12px 16px", "background:#f5b700", "color:#1a1400",
+            "font:500 14px/1.5 system-ui,sans-serif", "text-align:center",
+          ].join(";");
+          bar.innerHTML =
+            "This browser cannot open local files. " +
+            '<a href="/admin/preview/" style="color:#1a1400;font-weight:700">' +
+            "Use the preview editor instead →</a>" +
+            '<span style="opacity:.75"> &nbsp;·&nbsp; same fields, ' +
+            "data stored in this browser only</span>";
+          document.body.appendChild(bar);
+        });
+      })();
+    </script>
+  </body>
+</html>

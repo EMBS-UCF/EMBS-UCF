@@ -1,0 +1,12 @@
+# Layered on top of /admin/config.yml by /admin/preview/index.html.
+# Only the backend differs — everything else is inherited, so this file cannot
+# drift away from what officers actually see.
+
+# Keeps its data in the browser's own storage (OPFS) instead of GitHub, so the
+# editor runs in any modern browser with no login and no repository access.
+backend:
+  name: test-repo
+
+# Irrelevant here, and leaving it on would make Sveltia offer the Chromium-only
+# folder picker that this page exists to avoid.
+local_backend: false

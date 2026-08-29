@@ -1,0 +1,577 @@
+# ---------------------------------------------------------------------------
+# Configuration for the editing panel at embsucf.org/admin
+#
+# You do not need to read this file to edit the website. It only describes
+# which fields appear in the editor. If you want to add a whole new *kind* of
+# content (not just another project or officer), that is the change that
+# belongs here.
+# ---------------------------------------------------------------------------
+
+backend:
+  name: github
+  repo: EMBS-UCF/EMBS-UCF
+  branch: master
+  # Points at the Cloudflare Worker that handles "Log in with GitHub".
+  # See docs/CMS-SETUP.md for how this is deployed.
+  base_url: https://embs-cms-auth.embsucf.workers.dev
+
+# Lets the editor open the files on this computer instead of going through
+# GitHub, so the admin panel can be worked on before the login worker exists.
+# Only takes effect on localhost — it is ignored on the live site.
+local_backend: true
+
+site_url: https://embsucf.org
+display_url: https://embsucf.org
+logo_url: https://assets.embsucf.org/logo.png
+
+# Uploaded images land here and are served from the site root.
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  # -------------------------------------------------------------------------
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: content/projects
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{title}}"
+    summary: "{{title}}"
+    sortable_fields: [order, title]
+    fields:
+      - name: title
+        label: Project name
+        widget: string
+
+      - name: summary
+        label: One-line summary
+        widget: text
+        hint: >-
+          This is the entire description of the project on the site — there are
+          no individual project pages, so it has to stand on its own. Two or
+          three sentences, under 400 characters. Be specific about what the team
+          actually does.
+
+      - name: order
+        label: Display order
+        widget: number
+        value_type: int
+        default: 10
+        hint: Lower numbers appear first.
+
+      - name: meeting
+        label: When it meets
+        widget: string
+        required: false
+        default: ""
+        hint: >-
+          For example "Mondays, 4:30–6:00 PM", or "Sessions are on the chapter
+          calendar" if the dates vary. Leave blank if nothing is scheduled.
+          Do not put a room number here — rooms change, so they belong on the
+          individual calendar event.
+
+      - name: cover
+        label: Cover photo
+        widget: image
+        required: false
+        default: ""
+        hint: Optional. A wide photo works best — roughly twice as wide as it is tall.
+
+  # -------------------------------------------------------------------------
+  - name: officers
+    label: Officers
+    label_singular: Officer
+    folder: content/officers
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{order}}-{{name}}"
+    summary: "{{name}} — {{role}}"
+    sortable_fields: [order, name, role]
+    fields:
+      - name: name
+        label: Full name
+        widget: string
+
+      - name: role
+        label: Position
+        widget: string
+        hint: 'For example: President, Treasurer, Workshop Chair.'
+
+      - name: major
+        label: Major
+        widget: string
+        required: false
+        default: ""
+
+      - name: order
+        label: Display order
+        widget: number
+        value_type: int
+        default: 10
+        hint: >-
+          Lower numbers appear first. Convention is President 1, Vice President 2,
+          then the rest of the board.
+
+      - name: photo
+        label: Photo
+        widget: image
+        required: false
+        default: ""
+        hint: >-
+          A square or portrait headshot. If you leave this blank the site shows
+          their initials instead of a broken image.
+
+      - name: linkedin
+        label: LinkedIn URL
+        widget: string
+        required: false
+        default: ""
+        pattern:
+          - "^$|^https://.*linkedin\\.com/.*"
+          - Must be a full LinkedIn URL starting with https://, or left empty.
+
+  # -------------------------------------------------------------------------
+  - name: advisors
+    label: Faculty advisors
+    label_singular: Advisor
+    folder: content/advisors
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{name}}"
+    summary: "{{name}}"
+    fields:
+      - { name: name, label: Full name, widget: string }
+      - { name: role, label: Position, widget: string, default: Faculty Advisor }
+      - name: affiliation
+        label: Department
+        widget: string
+        required: false
+        default: ""
+      - { name: order, label: Display order, widget: number, value_type: int, default: 1 }
+      - { name: photo, label: Photo, widget: image, required: false, default: "" }
+      - name: linkedin
+        label: LinkedIn URL
+        widget: string
+        required: false
+        default: ""
+
+  # -------------------------------------------------------------------------
+  - name: resources
+    label: Resources
+    label_singular: Resource section
+    folder: content/resources
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{order}}-{{title}}"
+    summary: "{{title}}"
+    fields:
+      - { name: title, label: Section title, widget: string }
+      - name: description
+        label: Short description
+        widget: text
+        hint: One or two sentences, shown beside the list.
+      - { name: order, label: Display order, widget: number, value_type: int, default: 10 }
+
+      - name: items
+        label: Entries
+        widget: list
+        min: 1
+        label_singular: Entry
+        summary: "{{fields.label}}"
+        hint: >-
+          Each row can be a link or just a line of text. Leave the address empty
+          for things that are not links — a course to take, for instance.
+        fields:
+          - { name: label, label: Name, widget: string }
+          - name: note
+            label: Note
+            widget: string
+            required: false
+            default: ""
+            hint: One line explaining what it is or why it is worth your time.
+          - name: href
+            label: Address
+            widget: string
+            required: false
+            default: ""
+            pattern:
+              - "^$|^(https?://|/|mailto:).+"
+              - Leave empty, or start with https://, / or mailto:
+
+  # -------------------------------------------------------------------------
+  - name: pages
+    label: Page text
+    files:
+      - name: home
+        label: Home page
+        file: content/pages/home.json
+        description: Wording on the front page.
+        fields:
+          - name: seo
+            label: Search and link previews
+            widget: object
+            fields:
+              - { name: title, label: Browser tab title, widget: string }
+              - name: description
+                label: Description
+                widget: text
+                hint: Shown by Google and in Discord/LinkedIn link previews. Aim for 150–160 characters.
+
+          - name: hero
+            label: Top of the page
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label above the headline, widget: string }
+              - name: headline
+                label: Headline — first part
+                widget: string
+                hint: Shown in the normal typeface.
+              - name: headlineAccent
+                label: Headline — emphasised part
+                widget: string
+                hint: Shown in blue italic, immediately after the first part.
+              - { name: lede, label: Opening paragraph, widget: text }
+              - name: primaryCta
+                label: Main button
+                widget: object
+                fields:
+                  - { name: label, label: Button text, widget: string }
+                  - { name: href, label: Goes to, widget: string, hint: 'A path such as /join' }
+              - name: secondaryCta
+                label: Secondary button
+                widget: object
+                fields:
+                  - { name: label, label: Button text, widget: string }
+                  - { name: href, label: Goes to, widget: string }
+              - name: image
+                label: Photograph
+                widget: object
+                collapsed: true
+                hint: >-
+                  Optional. A wide photo of the chapter — a meeting, a workshop,
+                  people working. Leave it empty and the site shows its own
+                  graphic instead, which is better than a weak photo.
+                fields:
+                  - { name: src, label: Image, widget: image, required: false, default: "" }
+                  - name: alt
+                    label: Description for screen readers
+                    widget: string
+                    required: false
+                    default: ""
+                    hint: >-
+                      Say what is happening in the photo, in a sentence. Required
+                      whenever an image is set — the build will fail without it.
+                  - name: caption
+                    label: Caption
+                    widget: string
+                    required: false
+                    default: ""
+                    hint: Optional. Shown in small type under the photo.
+
+          - name: workSection
+            label: "Section: current work"
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+
+          - name: pillarSection
+            label: "Section: what membership involves"
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - name: pillars
+                label: Three points
+                widget: list
+                max: 3
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: body, label: Text, widget: text }
+
+          - name: joinSection
+            label: "Section: how to join"
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - name: steps
+                label: Steps
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: Step title, widget: string }
+                  - { name: body, label: Step text, widget: text }
+
+          - name: closing
+            label: "Section: closing call to action"
+            widget: object
+            fields:
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: text }
+              - name: primaryCta
+                label: Main button
+                widget: object
+                fields:
+                  - { name: label, label: Button text, widget: string }
+                  - { name: href, label: Goes to, widget: string }
+              - name: secondaryCta
+                label: Secondary button
+                widget: object
+                fields:
+                  - { name: label, label: Button text, widget: string }
+                  - { name: href, label: Goes to, widget: string }
+
+      - name: join
+        label: Join page
+        file: content/pages/join.json
+        fields:
+          - name: seo
+            label: Search and link previews
+            widget: object
+            fields:
+              - { name: title, label: Browser tab title, widget: string }
+              - { name: description, label: Description, widget: text }
+          - name: hero
+            label: Top of the page
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: lede, label: Opening paragraph, widget: text }
+          - name: faqs
+            label: Questions and answers
+            widget: list
+            summary: "{{fields.question}}"
+            fields:
+              - { name: question, label: Question, widget: string }
+              - { name: answer, label: Answer, widget: text }
+          - name: steps
+            label: "Box: what to expect"
+            widget: object
+            fields:
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: text }
+
+          - name: membership
+            label: "Section: IEEE EMBS membership"
+            widget: object
+            hint: >-
+              What society membership opens up. Keep this focused on what
+              members get.
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - name: benefits
+                label: Benefits
+                widget: list
+                min: 2
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: Benefit, widget: string }
+                  - { name: body, label: Explanation, widget: text }
+              - name: cta
+                label: Button
+                widget: object
+                fields:
+                  - { name: label, label: Button text, widget: string }
+                  - name: href
+                    label: Goes to
+                    widget: string
+                    hint: The IEEE EMBS join page. Verify it still resolves before changing it.
+              - name: note
+                label: Small print
+                widget: text
+                hint: Shown beside the button, in small type.
+              - name: image
+                label: Photograph
+                widget: object
+                collapsed: true
+                hint: >-
+                  Optional. A wide photo of the chapter — a meeting, a workshop,
+                  people working. Leave it empty and the site shows its own
+                  graphic instead, which is better than a weak photo.
+                fields:
+                  - { name: src, label: Image, widget: image, required: false, default: "" }
+                  - name: alt
+                    label: Description for screen readers
+                    widget: string
+                    required: false
+                    default: ""
+                    hint: >-
+                      Say what is happening in the photo, in a sentence. Required
+                      whenever an image is set — the build will fail without it.
+                  - name: caption
+                    label: Caption
+                    widget: string
+                    required: false
+                    default: ""
+                    hint: Optional. Shown in small type under the photo.
+
+      - name: events
+        label: Events page
+        file: content/pages/events.json
+        fields:
+          - name: seo
+            label: Search and link previews
+            widget: object
+            fields:
+              - { name: title, label: Browser tab title, widget: string }
+              - { name: description, label: Description, widget: text }
+          - name: hero
+            label: Top of the page
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: lede, label: Opening paragraph, widget: text }
+              - name: image
+                label: Photograph
+                widget: object
+                collapsed: true
+                hint: >-
+                  Optional. A wide photo of the chapter — a meeting, a workshop,
+                  people working. Leave it empty and the site shows its own
+                  graphic instead, which is better than a weak photo.
+                fields:
+                  - { name: src, label: Image, widget: image, required: false, default: "" }
+                  - name: alt
+                    label: Description for screen readers
+                    widget: string
+                    required: false
+                    default: ""
+                    hint: >-
+                      Say what is happening in the photo, in a sentence. Required
+                      whenever an image is set — the build will fail without it.
+                  - name: caption
+                    label: Caption
+                    widget: string
+                    required: false
+                    default: ""
+                    hint: Optional. Shown in small type under the photo.
+          - name: kinds
+            label: Kinds of event
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: body, label: Description, widget: text }
+
+      - name: contact
+        label: Contact page
+        file: content/pages/contact.json
+        fields:
+          - name: seo
+            label: Search and link previews
+            widget: object
+            fields:
+              - { name: title, label: Browser tab title, widget: string }
+              - { name: description, label: Description, widget: text }
+          - name: hero
+            label: Top of the page
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: lede, label: Opening paragraph, widget: text }
+          - name: channels
+            label: Ways to get in touch
+            widget: list
+            min: 1
+            max: 3
+            summary: "{{fields.title}}"
+            hint: >-
+              Keep this short. Two entries is usually right — the page reads as
+              repetitive the moment the same address is offered more than once.
+            fields:
+              - { name: title, label: Heading, widget: string }
+              - name: body
+                label: What it is best for
+                widget: text
+                hint: Say which kinds of message belong here, so people pick correctly.
+              - name: channel
+                label: Button goes to
+                widget: select
+                options:
+                  - { label: Discord, value: discord }
+                  - { label: Email, value: email }
+                default: email
+              - { name: cta, label: Button text, widget: string, default: Get in touch }
+
+  # -------------------------------------------------------------------------
+  - name: settings
+    label: Settings
+    files:
+      - name: site
+        label: Chapter details
+        file: content/settings/site.json
+        description: Email address, social links, and the calendar connection.
+        fields:
+          - { name: name, label: Short name, widget: string, hint: 'Shown in the header. Currently "IEEE EMBS".' }
+          - { name: chapter, label: Chapter line, widget: string, hint: 'The small line under the name in the header.' }
+          - { name: shortName, label: Name used in page titles, widget: string }
+          - { name: fullName, label: Full official name, widget: string }
+          - name: tagline
+            label: Tagline
+            widget: string
+            hint: Used in the browser tab on the home page and in link previews.
+          - { name: location, label: City and state, widget: string }
+          - { name: campus, label: University, widget: string }
+          - name: founded
+            label: Year founded
+            widget: string
+            hint: Shown in the footer and given to search engines. Should not need changing.
+          - name: email
+            label: Chapter email
+            widget: string
+            pattern: ["^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", "Must be a valid email address."]
+          - name: url
+            label: Website address
+            widget: string
+            hint: Used to build link previews and the sitemap. Do not change unless the domain changes.
+          - { name: assetBase, label: Image host, widget: string }
+          - { name: logo, label: Logo URL, widget: string }
+
+          - name: socials
+            label: Social links
+            widget: object
+            hint: Leave any of these empty to hide it from the site.
+            fields:
+              - { name: discord, label: Discord invite, widget: string, required: false, default: "" }
+              - { name: linkedin, label: LinkedIn page, widget: string, required: false, default: "" }
+              - { name: instagram, label: Instagram, widget: string, required: false, default: "" }
+              - { name: github, label: GitHub, widget: string, required: false, default: "" }
+
+          - name: calendar
+            label: Google Calendar
+            widget: object
+            fields:
+              - name: id
+                label: Calendar ID
+                widget: string
+                required: false
+                default: ""
+                hint: >-
+                  From Google Calendar → Settings → your calendar → Integrate calendar
+                  → Calendar ID. The calendar must be set to public. Leave empty to
+                  hide the live schedule.
+              - { name: timezone, label: Time zone, widget: string, default: America/New_York }
+              - name: gbmKeyword
+                label: General body meeting keyword
+                widget: string
+                default: GBM
+                hint: Calendar events containing this word are treated as general body meetings.
+              - name: maxUpcoming
+                label: How many events to list
+                widget: number
+                value_type: int
+                default: 4

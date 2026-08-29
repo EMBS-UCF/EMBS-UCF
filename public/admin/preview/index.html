@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>Preview the EMBS editor</title>
+
+    <!--
+      Firefox-friendly preview of the editing panel.
+
+      The real editor at /admin needs either GitHub login or the File System
+      Access API, and Firefox implements neither — the folder picker is
+      Chromium-only and Sveltia ships no proxy-server fallback.
+
+      This page loads the *same* config.yml and layers a two-line override on
+      top that swaps the backend for `test-repo`, which keeps its files in the
+      browser's own storage. Every collection, field, and hint is therefore
+      exactly what officers see, with no second copy of the config to drift.
+
+      That storage starts empty, so the script at the bottom seeds it from the
+      real `content/` directory before the editor initialises. Edits you make
+      here stay in this browser and are never committed.
+    -->
+    <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml" />
+    <link rel="cms-config-url" type="text/yaml" href="/admin/preview/backend.yml" />
+
+    <!-- Must be set before the CMS script runs, or it initialises itself
+         immediately and starts reading storage we have not filled yet. -->
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
+  </head>
+  <body>
+    <script src="https://unpkg.com/@sveltia/cms@0.111.0/dist/sveltia-cms.js"></script>
+
+    <script>
+      (function () {
+        var REPO_DIR = "sveltia-cms-test"; // the directory Sveltia's test backend reads
+        var MEDIA_DIR = "public/uploads";
+
+        function banner(text, tone) {
+          var el = document.getElementById("seed-status") || document.createElement("div");
+          el.id = "seed-status";
+          el.style.cssText = [
+            "position:fixed", "inset:auto auto 16px 16px", "z-index:2147483647",
+            "max-width:min(92vw,560px)", "padding:10px 14px", "border-radius:8px",
+            "font:500 13px/1.5 system-ui,sans-serif",
+            "background:" + (tone === "bad" ? "#7f1d1d" : "#1f2937"),
+            "color:#e5e7eb", "box-shadow:0 4px 20px rgba(0,0,0,.4)",
+          ].join(";");
+          el.innerHTML = text;
+          if (!el.parentNode) document.body.appendChild(el);
+          return el;
+        }
+
+        async function dirFor(root, segments) {
+          var handle = root;
+          for (var i = 0; i < segments.length; i++) {
+            handle = await handle.getDirectoryHandle(segments[i], { create: true });
+          }
+          return handle;
+        }
+
+        async function writeFile(root, path, text) {
+          var parts = path.split("/");
+          var name = parts.pop();
+          var dir = await dirFor(root, parts);
+          var file = await dir.getFileHandle(name, { create: true });
+          var writable = await file.createWritable();
+          await writable.write(text);
+          await writable.close();
+        }
+
+        async function isEmpty(dir) {
+          for await (var _entry of dir.values()) return false;
+          return true;
+        }
+
+        async function clear(dir) {
+          var names = [];
+          for await (var entry of dir.values()) names.push(entry.name);
+          for (var i = 0; i < names.length; i++) {
+            await dir.removeEntry(names[i], { recursive: true });
+          }
+        }
+
+        async function seed() {
+          if (!navigator.storage || !navigator.storage.getDirectory) {
+            return { ok: false, reason: "This browser has no Origin Private File System." };
+          }
+
+          var root = await navigator.storage.getDirectory();
+          var repo = await root.getDirectoryHandle(REPO_DIR, { create: true });
+          var force = new URLSearchParams(location.search).has("reseed");
+
+          if (!force && !(await isEmpty(repo))) {
+            return { ok: true, count: null, reused: true };
+          }
+          if (force) await clear(repo);
+
+          var res = await fetch("/admin/preview/content.json", { cache: "no-store" });
+          if (!res.ok) return { ok: false, reason: "content.json returned " + res.status };
+
+          var files = (await res.json()).files || [];
+          for (var i = 0; i < files.length; i++) {
+            await writeFile(repo, files[i].path, files[i].text);
+          }
+          // Image widgets expect the media folder to exist even when empty.
+          await dirFor(repo, MEDIA_DIR.split("/"));
+
+          return { ok: true, count: files.length, reused: false };
+        }
+
+        function start() {
+          if (!window.CMS || typeof window.CMS.init !== "function") {
+            banner("The editor script did not load. Check your network connection.", "bad");
+            return;
+          }
+          window.CMS.init();
+        }
+
+        seed()
+          .then(function (result) {
+            if (!result.ok) {
+              banner("Could not load existing content: " + result.reason +
+                     " The editor will open empty.", "bad");
+            } else if (result.reused) {
+              banner("Showing content already stored in this browser. " +
+                     '<a href="?reseed" style="color:#93c5fd">Reload from the repository →</a>');
+            } else {
+              banner("Loaded " + result.count + " content files into this browser. " +
+                     "Edits here are not committed.");
+            }
+            start();
+          })
+          .catch(function (error) {
+            console.error("[preview] seeding failed", error);
+            banner("Could not load existing content — " + error.message +
+                   ". The editor will open empty.", "bad");
+            start();
+          });
+      })();
+    </script>
+  </body>
+</html>

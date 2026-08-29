@@ -1,0 +1,26 @@
+{
+  "name": "IEEE EMBS",
+  "chapter": "UCF Chapter",
+  "shortName": "EMBS at UCF",
+  "fullName": "IEEE Engineering in Medicine and Biology Society at UCF",
+  "tagline": "The IEEE biomedical engineering society at UCF.",
+  "location": "Orlando, Florida",
+  "campus": "University of Central Florida",
+  "founded": "2024",
+  "email": "ieee.embs.ucf@gmail.com",
+  "url": "https://embsucf.org",
+  "assetBase": "https://assets.embsucf.org",
+  "logo": "https://assets.embsucf.org/logo.png",
+  "socials": {
+    "discord": "https://discord.gg/GXjTNuCvka",
+    "linkedin": "https://www.linkedin.com/company/ieee-embs-ucf/",
+    "instagram": "https://www.instagram.com/embs.ucf",
+    "github": "https://www.github.com/embs-ucf"
+  },
+  "calendar": {
+    "id": "",
+    "timezone": "America/New_York",
+    "gbmKeyword": "GBM",
+    "maxUpcoming": 4
+  }
+}

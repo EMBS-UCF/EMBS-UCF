@@ -1,0 +1,74 @@
+{
+  "seo": {
+    "title": "Join",
+    "description": "How to join IEEE EMBS at UCF, and what IEEE EMBS society membership gets you — scholarships, member conference rates, journals, and speakers."
+  },
+  "hero": {
+    "eyebrow": "Membership",
+    "headline": "There is no application.",
+    "lede": "Turn up to a general body meeting and you have started. This page covers the details people usually ask about, and what IEEE EMBS membership gets you on top."
+  },
+  "faqs": [
+    {
+      "question": "What major do I need to be?",
+      "answer": "Any engineering or science major. UCF does not offer an undergraduate biomedical engineering degree, so nobody in the chapter is one — members come from electrical, mechanical, computer science, photonics and elsewhere. The work is interdisciplinary because it has no choice but to be."
+    },
+    {
+      "question": "Do I need any background to get something out of this?",
+      "answer": "No. Meetings and workshops are pitched at people seeing the material for the first time, and the learning happens next to somebody who is a year or two ahead of you."
+    },
+    {
+      "question": "What does IEEE EMBS membership cost?",
+      "answer": "IEEE student membership plus the EMBS society add-on, both set by IEEE and revised annually. It is the lowest rate you will ever be offered, and it is what makes the scholarships, conference rates, and journals available to you."
+    },
+    {
+      "question": "Can I start mid-semester?",
+      "answer": "Yes. Meetings run throughout the term and there is no point in the calendar where turning up stops making sense."
+    },
+    {
+      "question": "How much time does it take?",
+      "answer": "A general body meeting is about an hour. Workshops are one-off sessions. A build team is a couple of hours a week if you want it to be. All of it is up to you."
+    },
+    {
+      "question": "I want to sponsor or collaborate with the chapter.",
+      "answer": "Email the chapter address and it will reach the officers. We are interested in speakers, equipment, and lab collaborations."
+    }
+  ],
+  "steps": {
+    "heading": "What to expect at your first meeting",
+    "body": "Chapter updates, whatever the project teams have got working since last time, and usually a speaker or a hands-on segment. People stay afterwards to talk. That is the part worth staying for."
+  },
+  "membership": {
+    "eyebrow": "IEEE EMBS",
+    "heading": "What society membership gets you",
+    "lede": "The chapter is the local branch of a society of tens of thousands of biomedical engineers. Joining IEEE EMBS as a student member opens things that sit with the society rather than with us.",
+    "benefits": [
+      {
+        "title": "Scholarships, awards, and travel grants",
+        "body": "EMBS runs student awards and travel grants, and IEEE runs scholarship programmes across its societies. These are open to members, and the applicant pools are smaller than you would expect."
+      },
+      {
+        "title": "Conferences at member rates",
+        "body": "EMBC is the society's annual international conference and one of the largest biomedical engineering meetings in the world. Members register at reduced rates, and students lower still."
+      },
+      {
+        "title": "The journals",
+        "body": "Membership carries access to EMBS publications through IEEE Xplore — Transactions on Biomedical Engineering, the Journal of Biomedical and Health Informatics, and the rest of the portfolio."
+      },
+      {
+        "title": "Speakers and lecturers",
+        "body": "EMBS runs a Distinguished Lecturer programme that chapters can draw on, along with member-only webinars and technical committees you can actually take part in."
+      }
+    ],
+    "cta": {
+      "label": "Join IEEE EMBS",
+      "href": "https://www.embs.org/membership/"
+    },
+    "note": "Student rates are set by IEEE and change each year. Check the current figure before you sign up.",
+    "image": {
+      "src": "",
+      "alt": "",
+      "caption": ""
+    }
+  }
+}

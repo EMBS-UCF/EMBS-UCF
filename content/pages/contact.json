@@ -1,0 +1,25 @@
+{
+  "seo": {
+    "title": "Contact",
+    "description": "Get in touch with IEEE EMBS at UCF about membership, projects, sponsorship, or collaboration."
+  },
+  "hero": {
+    "eyebrow": "Contact",
+    "headline": "Ask us something.",
+    "lede": "Two ways in, depending on what you need. Neither of them is a contact form."
+  },
+  "channels": [
+    {
+      "title": "Discord",
+      "body": "Best for anything small and immediate — how to join, which project to pick, when the next meeting is. Post in the general channel and an officer or a project lead will answer.",
+      "channel": "discord",
+      "cta": "Open the invite"
+    },
+    {
+      "title": "Email",
+      "body": "Best for anything that needs a written reply — sponsorship, speakers, equipment, lab collaborations, and questions about IEEE membership or dues. It reaches the officers directly.",
+      "channel": "email",
+      "cta": "Write to us"
+    }
+  ]
+}

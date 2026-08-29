@@ -1,0 +1,30 @@
+{
+  "seo": {
+    "title": "Events",
+    "description": "General body meetings, workshops, and build sessions for IEEE EMBS at UCF. Live chapter calendar."
+  },
+  "hero": {
+    "eyebrow": "Calendar",
+    "headline": "Everything is on one calendar.",
+    "lede": "General body meetings, workshops, project build sessions, and competition deadlines. Subscribe to it and you will not have to check this page again.",
+    "image": {
+      "src": "",
+      "alt": "",
+      "caption": ""
+    }
+  },
+  "kinds": [
+    {
+      "title": "General body meetings",
+      "body": "Chapter-wide. Updates, project demos, and speakers. The right thing to attend first."
+    },
+    {
+      "title": "Workshops",
+      "body": "Hands-on and skill-specific — soldering, instrumentation, signal processing, PCB layout."
+    },
+    {
+      "title": "Build sessions",
+      "body": "Project teams working on their build. Drop in on one to see what a team actually does."
+    }
+  ]
+}
