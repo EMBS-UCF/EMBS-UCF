@@ -3,6 +3,102 @@
 The site is a static build served by Cloudflare Pages. Pushing to `master`
 deploys it; there is no manual deploy step.
 
+---
+
+## First deploy: moving the live site onto this build
+
+`embsucf.org` already resolves to Cloudflare and its response headers look like
+an existing Pages project, so this is most likely an update to something that
+exists rather than a fresh setup. Check first.
+
+### 1. Find out what is serving the domain today
+
+Cloudflare dashboard → **Workers & Pages**. Look for a project with
+`embsucf.org` under its custom domains.
+
+- **It exists and is connected to the GitHub repo** — you only need step 2 and
+  step 4. Merging to `master` will deploy.
+- **It exists but has no Git connection** (deployments say "Direct Upload") —
+  you cannot add Git to an existing direct-upload project. Create a new one as
+  in step 3, then move the custom domain across.
+- **Nothing there** — go to step 3.
+
+### 2. Fix the environment variables
+
+**This is the step most likely to bite.** The previous site read
+`VITE_APP_GOOGLE_API_KEY`. This one reads `VITE_GOOGLE_API_KEY` — no `APP_`.
+If the old name is left in place the site deploys fine and the Events page
+says the calendar is not connected.
+
+Under **Settings → Variables and secrets**, for both Production and Preview:
+
+| Name | Value |
+| --- | --- |
+| `VITE_GOOGLE_API_KEY` | Your Google Calendar API key |
+
+Delete `VITE_APP_GOOGLE_API_KEY` and `VITE_APP_GOOGLE_CALENDAR_ID` once the new
+one works. The calendar ID is no longer an environment variable — it is set in
+the admin panel under **Settings → Google Calendar**, so officers can change it
+without a developer.
+
+`.node-version` in the repo pins Node 22, so no `NODE_VERSION` variable is
+needed.
+
+### 3. Create the Pages project, if you need one
+
+**Workers & Pages → Create → Pages → Connect to Git**, then:
+
+| Setting | Value |
+| --- | --- |
+| Repository | `EMBS-UCF/EMBS-UCF` |
+| Production branch | `master` |
+| Framework preset | None |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+
+### 4. Push the branch and look at the preview first
+
+```bash
+git push -u origin redesign
+```
+
+Cloudflare builds every branch and gives it its own URL, something like
+`redesign.embs-ucf.pages.dev`. **Look at that before merging.** It is the real
+build on real infrastructure, and nothing about the live site changes.
+
+Check on the preview URL:
+
+- The home page, and that the Events page shows real calendar data rather than
+  "not connected" — that is your environment variable check.
+- `/nonexistent` returns the 404 page.
+- A link preview: paste the preview URL into a Discord channel and confirm the
+  card shows a title and description.
+
+When it looks right, merge to `master`:
+
+```bash
+git checkout master && git merge redesign && git push
+```
+
+### 5. Point the domain at it
+
+Only needed if you created a new project. Pages project → **Custom domains** →
+**Set up a domain** → `embsucf.org`.
+
+The DNS is already in this Cloudflare account, so the record is rewritten for
+you. Add `www.embsucf.org` too if you want it to resolve — it currently does
+not.
+
+### 6. Turn on the editor
+
+`/admin/` will load after the first deploy but nobody can sign in until the
+GitHub OAuth worker exists. Follow [`CMS-SETUP.md`](./CMS-SETUP.md), then check
+`base_url` in `public/admin/config.yml` matches the worker you deployed.
+
+Until then, `/admin/preview/` works and shows the real content.
+
+---
+
 ## Cloudflare Pages settings
 
 | Setting | Value |
