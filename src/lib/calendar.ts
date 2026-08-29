@@ -28,8 +28,29 @@ interface GoogleEventItem {
   end?: { dateTime?: string; date?: string };
 }
 
-const API_KEY: string = import.meta.env.VITE_GOOGLE_API_KEY ?? "";
-const CALENDAR_ID: string = import.meta.env.VITE_GOOGLE_CALENDAR_ID || site.calendar.id;
+/**
+ * The key is read from either name. `VITE_APP_GOOGLE_API_KEY` is what the
+ * previous version of this site used, and it is still set in the Cloudflare
+ * project — accepting it means the calendar keeps working through the rename
+ * instead of going dark on the first deploy.
+ *
+ * Both must be plaintext environment variables, not encrypted secrets:
+ * Cloudflare secrets are a Pages Functions binding and never reach the build,
+ * while Vite substitutes these at bundle time. See docs/DEPLOYMENT.md.
+ *
+ * Neither is sensitive. Anything VITE_-prefixed is compiled into public
+ * JavaScript; this is a referrer-restricted browser key and being readable is
+ * its normal condition.
+ */
+const API_KEY: string =
+  import.meta.env.VITE_GOOGLE_API_KEY ||
+  import.meta.env.VITE_APP_GOOGLE_API_KEY ||
+  "";
+
+const CALENDAR_ID: string =
+  import.meta.env.VITE_GOOGLE_CALENDAR_ID ||
+  import.meta.env.VITE_APP_GOOGLE_CALENDAR_ID ||
+  site.calendar.id;
 
 export const calendarIsConfigured = (): boolean =>
   API_KEY !== "" && CALENDAR_ID !== "";
