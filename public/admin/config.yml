@@ -257,30 +257,35 @@ collections:
                 fields:
                   - { name: label, label: Button text, widget: string }
                   - { name: href, label: Goes to, widget: string }
-              - name: image
-                label: Photograph
-                widget: object
-                collapsed: true
+              - name: slides
+                label: Photo slideshow
+                widget: list
+                required: false
+                default: []
+                label_singular: Photo
+                summary: "{{fields.alt}}"
                 hint: >-
-                  Optional. A wide photo of the chapter — a meeting, a workshop,
-                  people working. Leave it empty and the site shows its own
-                  graphic instead, which is better than a weak photo.
+                  Photographs beside the headline. One shows on its own; two or
+                  more become a slideshow. Leave the list empty and the site
+                  shows its own graphic instead — better than a weak photo.
+
+                  Portrait photos work best here. Landscape ones will be cropped
+                  to a tall frame.
                 fields:
-                  - { name: src, label: Image, widget: image, required: false, default: "" }
+                  - { name: src, label: Photo, widget: image }
                   - name: alt
                     label: Description for screen readers
                     widget: string
-                    required: false
-                    default: ""
                     hint: >-
-                      Say what is happening in the photo, in a sentence. Required
-                      whenever an image is set — the build will fail without it.
+                      Say what is happening in the photo, in a sentence. This is
+                      what screen readers announce and what shows if the image
+                      fails to load. The build will not pass without it.
                   - name: caption
                     label: Caption
                     widget: string
                     required: false
                     default: ""
-                    hint: Optional. Shown in small type under the photo.
+                    hint: Optional. Shown in small type under the slideshow.
 
           - name: workSection
             label: "Section: current work"

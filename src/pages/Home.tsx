@@ -11,11 +11,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Waveform } from "@/components/ui/Waveform";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { EventList } from "@/components/ui/EventList";
-import { PhotoBand } from "@/components/ui/PhotoBand";
+import { Slideshow } from "@/components/ui/Slideshow";
 import { Countdown } from "@/components/ui/Countdown";
 
 function Hero() {
   const { hero } = homeCopy;
+  const slides = hero.slides ?? [];
 
   return (
     <section className="texture-grid relative overflow-hidden pt-14 pb-16 sm:pt-24 sm:pb-24">
@@ -31,7 +32,8 @@ function Hero() {
       />
 
       <Container width="wide">
-        <div className="relative max-w-4xl">
+        <div className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+          <div className="max-w-2xl">
           <Reveal>
             <Eyebrow>{hero.eyebrow}</Eyebrow>
           </Reveal>
@@ -58,17 +60,18 @@ function Hero() {
               </ButtonLink>
             </div>
           </Reveal>
+          </div>
+
+          {slides.length > 0 && (
+            <Reveal delay={200} className="mx-auto w-full max-w-sm lg:max-w-none">
+              <Slideshow slides={slides} />
+            </Reveal>
+          )}
         </div>
 
-        {hero.image?.src ? (
-          <Reveal delay={240} className="mt-16 sm:mt-20">
-            <PhotoBand photo={hero.image} ratio="wide" priority />
-          </Reveal>
-        ) : (
-          <Reveal delay={240} className="mt-20 text-accent sm:mt-28">
-            <Waveform className="h-20 sm:h-28" />
-          </Reveal>
-        )}
+        <Reveal delay={260} className="mt-16 text-accent sm:mt-20">
+          <Waveform className="h-14 sm:h-16" />
+        </Reveal>
       </Container>
     </section>
   );

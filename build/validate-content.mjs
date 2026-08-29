@@ -189,7 +189,6 @@ for (const [relPath, required] of Object.entries(pageRequirements)) {
 // "required only when another field is filled". Catching it here means an
 // officer who uploads an image and skips the description finds out at once.
 const imageSlots = [
-  ["pages/home.json", "hero.image", "the home page hero"],
   ["pages/join.json", "membership.image", "the membership section"],
   ["pages/events.json", "hero.image", "the events page"],
 ];
@@ -207,6 +206,29 @@ for (const [relPath, path, where] of imageSlots) {
   }
   if (!isUrlOrEmpty(image.src)) {
     report(page.file, `\`${path}.src\` must be an uploaded image or a full URL.`);
+  }
+}
+
+// Home page slideshow: every slide needs a description, for the same reason.
+const homePage = readJson("pages/home.json");
+if (homePage) {
+  const slides = homePage.data.hero?.slides;
+  if (slides !== undefined && !Array.isArray(slides)) {
+    report(homePage.file, "`hero.slides` must be a list.");
+  } else {
+    (slides ?? []).forEach((slide, i) => {
+      if (!isFilledString(slide?.src)) {
+        report(homePage.file, `hero.slides[${i}] has no image. Remove the entry or choose a photo.`);
+      } else if (!isUrlOrEmpty(slide.src)) {
+        report(homePage.file, `hero.slides[${i}].src must be an uploaded image or a full URL.`);
+      }
+      if (!isFilledString(slide?.alt)) {
+        report(
+          homePage.file,
+          `hero.slides[${i}] has no \`alt\` text. Describe what is happening in the photo — it is what screen readers announce.`,
+        );
+      }
+    });
   }
 }
 
