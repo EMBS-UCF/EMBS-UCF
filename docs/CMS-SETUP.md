@@ -130,15 +130,71 @@ backend:
 
 If you deployed the worker under a different name, change it here.
 
-## 5. Grant officers access
+## 5. Control who can edit
 
-Anyone who should be able to edit the site needs **write** access to the
-`EMBS-UCF/EMBS-UCF` repository. Add them as an organisation member with the
-Write role.
+There is no separate account system, no user list, and no password to share.
+**Identity is a GitHub account, and permission is write access to the
+`EMBS-UCF/EMBS-UCF` repository.** That is the whole model.
 
-This is the only access control on the editor. Removing someone from the
-GitHub organisation removes their ability to edit the site, which is what you
-want to do at the end of every academic year.
+Anyone with write access can edit the site. Anyone without it can sign in and
+will be refused. Nothing else grants or blocks access.
+
+### Adding and removing people
+
+Do it with a **team**, not per-person repository permissions — one list to
+maintain instead of a scatter of individual grants:
+
+1. Organisation → **Teams** → **New team**, called something like
+   `site-editors`.
+2. Repository → **Settings** → **Collaborators and teams** → **Add team** →
+   `site-editors` with the **Write** role.
+3. Add and remove people from the team as officers change.
+
+Read access is not enough — the editor works by committing, so it needs Write.
+Do not grant Admin; it is not required and it lets people change repository
+settings.
+
+Removing somebody from the team, or from the organisation, revokes their
+access immediately. **Do this at the end of every academic year**, along with
+the credential handover below.
+
+Every edit is a Git commit carrying the GitHub identity of whoever made it, so
+there is a complete audit trail of who changed what and when — `git log` on any
+content file.
+
+### Restricting the OAuth app
+
+Organisation owners can require approval before any OAuth application can act
+on the organisation's behalf: Organisation → **Settings** → **Third-party
+Access**. Worth turning on. It is a second gate, independent of repository
+permissions.
+
+### If you want changes reviewed before they go live
+
+By default, saving in the editor commits straight to `master` and the site
+rebuilds. There is no approval step — Sveltia CMS does not implement one, and
+it logs a warning if you try to configure `publish_mode: editorial_workflow`.
+
+**Do not put branch protection on `master` while the editor points at it.**
+Protected branches reject the editor's commits, and officers get an error they
+cannot interpret.
+
+If you do want a review gate, point the editor at a separate branch instead:
+
+```yaml
+backend:
+  name: github
+  repo: EMBS-UCF/EMBS-UCF
+  branch: staging      # was: master
+```
+
+Officers then edit `staging`, Cloudflare builds it to its own preview URL, and
+somebody with access to `master` merges when it looks right. That gives you an
+approval step and a preview of every change, at the cost of publishing being
+two actions instead of one.
+
+Worth it if the board is large or turnover is high. Overkill for three or four
+officers who all know what they are doing.
 
 ---
 

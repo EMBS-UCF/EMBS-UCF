@@ -165,9 +165,16 @@ Go back to the admin panel, fix that field, and publish again.
 
 ### I cannot log in
 
-Your GitHub account has to be a member of the EMBS-UCF organisation with write
-access. Ask the current president. If you are a member and it still fails, the
-login service may need attention — see [`CMS-SETUP.md`](./CMS-SETUP.md).
+Editing the site needs a GitHub account with **write access** to the chapter's
+repository. There is no separate site account and no shared password — if you
+can push to the repository, you can edit the site.
+
+Ask the current president to add you. If you are already on the team and it
+still fails, the login service may need attention — see
+[`CMS-SETUP.md`](./CMS-SETUP.md).
+
+Note that anything you publish goes live directly. There is no draft or
+approval step, so read your change before you press Publish.
 
 ### I deleted something by accident
 
