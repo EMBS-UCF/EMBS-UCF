@@ -1,6 +1,6 @@
 ---
 title: Coursework
-description: UCF has no undergraduate biomedical engineering degree, so this gets assembled out of other departments. Roughly what each area gives you.
+description: UCF doesn't offer an undergraduate biomedical engineering degree, so this gets assembled out of other departments. Here's what each area gives you.
 order: 1
 items:
   - label: Signals and systems, DSP
@@ -19,6 +19,6 @@ items:
     note: Force, gait, and how materials behave in the body.
     href: ""
   - label: Medical imaging
-    note: Reconstruction and image processing. Worth taking if you are heading toward research.
+    note: Reconstruction and image processing. Worth taking if you're heading toward research.
     href: ""
 ---

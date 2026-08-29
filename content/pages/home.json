@@ -1,13 +1,13 @@
 {
   "seo": {
     "title": "IEEE EMBS at UCF",
-    "description": "The IEEE Engineering in Medicine and Biology Society chapter at the University of Central Florida. Speakers, workshops, hardware teams, and student membership of the world's largest biomedical engineering society."
+    "description": "The UCF student chapter of IEEE EMBS, the world's largest biomedical engineering society. Speakers, workshops, and student-built medical hardware in Orlando."
   },
   "hero": {
     "eyebrow": "IEEE Engineering in Medicine and Biology Society",
     "headline": "Biomedical engineering",
     "headlineAccent": "at UCF.",
-    "lede": "IEEE EMBS is the largest biomedical engineering society in the world, and this is its chapter at the University of Central Florida. We run speakers, workshops, and a small number of hardware teams.",
+    "lede": "We're the UCF student chapter of IEEE EMBS, the world's largest biomedical engineering society. Speakers, hands-on workshops, and student-built medical hardware — open to any engineering major, since UCF doesn't offer a biomedical degree.",
     "primaryCta": {
       "label": "Join the chapter",
       "href": "/join"
@@ -23,50 +23,50 @@
     }
   },
   "workSection": {
-    "eyebrow": "Hardware teams",
-    "heading": "What some members are building",
-    "lede": "A couple of build teams run alongside everything else. They are one of the things the chapter offers rather than the whole of it, and they take new people at any point."
+    "eyebrow": "Projects",
+    "heading": "What we're building",
+    "lede": "Our project teams design, wire, and test real devices. They take new members throughout the semester, and you don't need experience to start."
   },
   "pillarSection": {
-    "eyebrow": "What the chapter does",
-    "heading": "Meetings, workshops, and a society behind them",
-    "lede": "A fair description of what you would be signing up for.",
+    "eyebrow": "What we do",
+    "heading": "What you'll find here",
+    "lede": "Three things the chapter runs, and what each one is for.",
     "pillars": [
       {
         "title": "General body meetings",
-        "body": "The main thing the chapter does. Updates, a speaker or a hands-on segment, and time afterwards to talk to people who are further along than you are."
+        "body": "Our main event. Chapter updates, a guest speaker or a hands-on segment, and time afterward to talk with students a few years ahead of you."
       },
       {
         "title": "Workshops and build teams",
-        "body": "Skill sessions — soldering, instrumentation, signal processing — and a small number of hardware teams for people who want to spend their time that way."
+        "body": "Skill sessions in soldering, instrumentation, and signal processing, plus project teams building real hardware. Come to what interests you."
       },
       {
         "title": "IEEE EMBS membership",
-        "body": "EMBS is the largest biomedical engineering society in the world. Society membership opens scholarships, member conference rates, and the journals — none of which the chapter can hand out on its own."
+        "body": "Joining the society gets you scholarships, member rates at EMBC, and the full EMBS journal catalog. That's what the chapter can't hand out on its own."
       }
     ]
   },
   "joinSection": {
     "eyebrow": "Getting started",
-    "heading": "Three steps, none of them difficult",
+    "heading": "How to get involved",
     "steps": [
       {
-        "title": "Come to a general body meeting",
-        "body": "They are on the chapter calendar. Turn up — there is no signup form and nobody will stop you at the door."
+        "title": "Come to a meeting",
+        "body": "Find the next one on the calendar and show up. There's no form to fill in, and nobody asks you for dues at the door."
       },
       {
-        "title": "Pick up whatever interests you",
-        "body": "Workshops, a speaker series, outreach, or one of the build teams. Most members do some of these and not others."
+        "title": "Find what interests you",
+        "body": "Workshops, speakers, outreach, or a build team. Take what you want and skip the rest — most members do."
       },
       {
         "title": "Join IEEE EMBS",
-        "body": "Society membership is the step that unlocks scholarships, conference rates, and journal access. It is cheapest while you are a student."
+        "body": "Society membership opens up scholarships, conference rates, and the journals. Student rates are the lowest you'll ever be offered."
       }
     ]
   },
   "closing": {
-    "heading": "Come to one meeting before you decide.",
-    "body": "That is genuinely the entire ask. Check the calendar, find the next general body meeting, and see whether it is for you.",
+    "heading": "Come to the next meeting.",
+    "body": "Check the calendar, show up, and introduce yourself. You'll know within an hour whether it's for you.",
     "primaryCta": {
       "label": "Check the calendar",
       "href": "/events"

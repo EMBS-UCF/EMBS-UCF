@@ -8,9 +8,9 @@ export default function Officers() {
   return (
     <>
       <PageHeader
-        eyebrow="The chapter"
-        heading="Who to talk to."
-        lede="These are the people running the chapter this year. Any of them is a reasonable person to ask about joining, about a project, or about something you cannot find on this site."
+        eyebrow="Officers"
+        heading="Meet the team"
+        lede="These are the students running the chapter this year. Any of them is a good person to ask about joining, about a project, or about anything you can't find here."
       />
 
       <Section width="wide" heading="Officers">

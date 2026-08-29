@@ -64,7 +64,7 @@ export default function Events() {
 
       <Section
         width="wide"
-        eyebrow="What's coming up"
+        eyebrow="Upcoming"
         heading="The next few things on the calendar"
       >
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-16">
@@ -101,7 +101,7 @@ export default function Events() {
         ) : (
           <Reveal className="rounded-card border border-dashed border-line-strong p-10 text-center">
             <p className="text-muted">
-              The chapter calendar has not been connected yet.
+              The chapter calendar isn't connected yet.
             </p>
             <p className="mx-auto mt-2 max-w-md font-mono text-xs leading-relaxed text-faint">
               An officer can add the calendar ID under Settings in the admin panel,

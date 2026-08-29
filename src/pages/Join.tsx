@@ -24,7 +24,7 @@ export default function Join() {
         </div>
       </PageHeader>
 
-      <Section width="wide" eyebrow="The process" heading="Three steps">
+      <Section width="wide" eyebrow="Getting started" heading="How to get involved">
         <ol className="grid gap-px overflow-hidden rounded-card border border-line bg-line md:grid-cols-3">
           {joinSection.steps.map((step, i) => (
             <Reveal as="li" key={step.title} delay={i * 70} className="bg-surface p-7 sm:p-8">
@@ -110,7 +110,7 @@ export default function Join() {
 
         <Reveal className="mt-12">
           <p className="text-muted">
-            Something not covered here?{" "}
+            Not covered here?{" "}
             <a
               href={`mailto:${site.email}`}
               className="text-accent-text underline decoration-1 underline-offset-4 hover:no-underline"

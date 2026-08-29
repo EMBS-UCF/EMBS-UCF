@@ -1,6 +1,6 @@
 ---
 title: Scholarships and funding
-description: Money that exists for engineering students and is routinely left unclaimed.
+description: Money that exists for engineering students and regularly goes unclaimed.
 order: 3
 items:
   - label: IEEE student scholarships and awards

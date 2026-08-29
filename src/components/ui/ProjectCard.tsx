@@ -18,7 +18,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, headingLevel: Heading = "h3" }: ProjectCardProps) {
   return (
-    <Card as="article" className="flex flex-col overflow-hidden">
+    <Card as="article" className="flex h-full flex-col overflow-hidden">
       {project.cover && (
         <div className="aspect-16/9 overflow-hidden border-b border-line bg-surface-sunk">
           <img

@@ -1,6 +1,6 @@
 ---
 title: IEEE EMBS
-description: What society membership connects you to, beyond the chapter.
+description: What society membership connects you to beyond the chapter.
 order: 2
 items:
   - label: IEEE EMBS

@@ -49,8 +49,8 @@ export default function Resources() {
     <>
       <PageHeader
         eyebrow="Resources"
-        heading="Where to look."
-        lede="Coursework, the society, money, and research positions. Collected here because the same questions come up at every meeting."
+        heading="Coursework, funding, and research"
+        lede="The questions that come up at every meeting, answered in one place."
       />
 
       {resourceSections.map((section, index) => (
@@ -88,7 +88,7 @@ export default function Resources() {
           </h2>
           <p className="mt-4 max-w-xl leading-relaxed text-muted">
             Scholarships close, labs open positions, and links rot. If you find
-            something that would have been useful to you a year ago, send it over.
+            something that would've helped you a year ago, send it over.
           </p>
           <ButtonLink to={`mailto:${site.email}`} variant="secondary" className="mt-6">
             Send us a link

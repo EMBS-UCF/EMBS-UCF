@@ -5,19 +5,19 @@
   },
   "hero": {
     "eyebrow": "Contact",
-    "headline": "Ask us something.",
-    "lede": "Two ways in, depending on what you need. Neither of them is a contact form."
+    "headline": "Get in touch",
+    "lede": "Discord for quick questions, email for everything else."
   },
   "channels": [
     {
       "title": "Discord",
-      "body": "Best for anything small and immediate — how to join, which project to pick, when the next meeting is. Post in the general channel and an officer or a project lead will answer.",
+      "body": "Best for anything quick — how to join, which project to pick, when the next meeting is. Post in the general channel and an officer or project lead will answer.",
       "channel": "discord",
       "cta": "Open the invite"
     },
     {
       "title": "Email",
-      "body": "Best for anything that needs a written reply — sponsorship, speakers, equipment, lab collaborations, and questions about IEEE membership or dues. It reaches the officers directly.",
+      "body": "Best for anything that needs a written reply — sponsorship, speakers, equipment, lab collaborations, and questions about IEEE membership. It reaches the officers directly.",
       "channel": "email",
       "cta": "Write to us"
     }

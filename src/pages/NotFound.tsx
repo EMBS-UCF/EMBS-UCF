@@ -11,11 +11,11 @@ export default function NotFound() {
       <div className="flex min-h-[60vh] flex-col justify-center py-20">
         <Eyebrow>Error 404</Eyebrow>
         <h1 className="mt-5 font-display text-display-2 text-ink">
-          No signal on this channel.
+          Page not found
         </h1>
         <p className="mt-5 max-w-md text-lede text-muted">
-          That page does not exist. It may have been renamed, or the link that
-          brought you here may be out of date.
+          This page doesn't exist. It may have been renamed, or the link that
+          brought you here is out of date.
         </p>
 
         <div className="mt-9">

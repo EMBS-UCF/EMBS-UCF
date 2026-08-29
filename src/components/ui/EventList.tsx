@@ -74,8 +74,8 @@ export function EventList({ state, emptyLabel = "Nothing scheduled yet." }: Even
       <Card className="p-6">
         <StatusDot live={false} label="Calendar not connected" />
         <p className="mt-3 text-sm leading-relaxed text-muted">
-          The chapter calendar has not been linked yet. Until it is, the Discord
-          server is the reliable place to find the next meeting.
+          The chapter calendar isn't connected yet. Until it is, Discord is the
+          best place to find out when we're meeting.
         </p>
         <ButtonLink to={site.socials.discord} variant="secondary" size="md" className="mt-5">
           Open Discord
@@ -89,8 +89,8 @@ export function EventList({ state, emptyLabel = "Nothing scheduled yet." }: Even
       <Card className="p-6">
         <StatusDot live={false} label="Calendar unavailable" />
         <p className="mt-3 text-sm leading-relaxed text-muted">
-          Google did not return the schedule just now. The embedded calendar
-          below should still work.
+          Couldn't load the schedule just now. The calendar below should still
+          work.
         </p>
         <p className="mt-2 font-mono text-xs text-faint">{state.message}</p>
       </Card>

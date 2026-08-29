@@ -10,9 +10,9 @@ export default function Projects() {
   return (
     <>
       <PageHeader
-        eyebrow="Hardware teams"
-        heading="A few people build things."
-        lede="Build teams run alongside the meetings and workshops for members who want to spend their time that way. They take new people at any point, including partway through."
+        eyebrow="Projects"
+        heading="Student-built medical hardware"
+        lede="Our project teams design, wire, and test real devices. They're open to every member and take new people throughout the semester, including partway through a build."
       />
 
       <Section width="wide" className="pb-24 sm:pb-32">
@@ -26,8 +26,8 @@ export default function Projects() {
 
         <Reveal className="mt-12">
           <p className="max-w-xl text-muted">
-            Sessions are listed on the chapter calendar. Turn up to one and ask what
-            needs doing.
+            Build sessions are on the chapter calendar. Come to one and ask what needs
+            doing — that's genuinely how most people start.
           </p>
           <ButtonLink to="/events" variant="secondary" className="mt-5">
             See the calendar

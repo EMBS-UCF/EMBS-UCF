@@ -1,12 +1,12 @@
 {
   "seo": {
     "title": "Events",
-    "description": "General body meetings, workshops, and build sessions for IEEE EMBS at UCF. Live chapter calendar."
+    "description": "General body meetings, workshops, and build sessions for IEEE EMBS at UCF, on one live calendar."
   },
   "hero": {
-    "eyebrow": "Calendar",
-    "headline": "Everything is on one calendar.",
-    "lede": "General body meetings, workshops, project build sessions, and competition deadlines. Subscribe to it and you will not have to check this page again.",
+    "eyebrow": "Events",
+    "headline": "What's coming up",
+    "lede": "General body meetings, workshops, and build sessions all live on one calendar. Subscribe once and you won't need to check back.",
     "image": {
       "src": "",
       "alt": "",
@@ -16,7 +16,7 @@
   "kinds": [
     {
       "title": "General body meetings",
-      "body": "Chapter-wide. Updates, project demos, and speakers. The right thing to attend first."
+      "body": "Chapter-wide. Updates, project demos, and guest speakers. Start here if you're new."
     },
     {
       "title": "Workshops",
@@ -24,7 +24,7 @@
     },
     {
       "title": "Build sessions",
-      "body": "Project teams working on their build. Drop in on one to see what a team actually does."
+      "body": "Project teams working on their hardware. Drop in to see what a team actually does."
     }
   ]
 }
