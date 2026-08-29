@@ -124,23 +124,6 @@ for (const { file, data } of readCollection("projects")) {
 
 if (![...projectSlugs].length) problems.push("content/projects\n    No projects found.");
 
-/* --------------------------- resources -------------------------- */
-
-for (const { file, data } of readCollection("resources")) {
-  if (!isFilledString(data.title)) report(file, "`title` is required.");
-  if (typeof data.order !== "number") report(file, "`order` must be a number.");
-
-  const items = Array.isArray(data.items) ? data.items : [];
-  if (items.length === 0) report(file, "This section has no entries. Add at least one, or delete the section.");
-
-  items.forEach((item, i) => {
-    if (!isFilledString(item?.label)) report(file, `items[${i}] is missing a \`label\`.`);
-    // An empty address is allowed on purpose: coursework entries are not links.
-    if (isFilledString(item?.href) && !/^(https?:\/\/|\/|mailto:)/.test(item.href))
-      report(file, `items[${i}] ("${item?.label ?? "?"}") href must start with https://, / or mailto: (found: ${item.href}).`);
-  });
-}
-
 /* ---------------------------- settings -------------------------- */
 
 const settings = readJson("settings/site.json");

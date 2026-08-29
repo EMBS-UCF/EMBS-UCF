@@ -55,7 +55,6 @@ content/            Everything an officer can edit. The CMS writes here.
   officers/         One Markdown file per officer
   advisors/
   projects/         One Markdown file per project; body becomes the project page
-  resources/
 
 build/
   markdown.ts       Vite plugin: Markdown -> HTML at build time

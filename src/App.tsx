@@ -4,7 +4,6 @@ import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import Events from "@/pages/Events";
 import Officers from "@/pages/Officers";
-import Resources from "@/pages/Resources";
 import Join from "@/pages/Join";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
@@ -22,7 +21,6 @@ export function App() {
         <Route path="projects" element={<Projects />} />
         <Route path="events" element={<Events />} />
         <Route path="officers" element={<Officers />} />
-        <Route path="resources" element={<Resources />} />
         <Route path="join" element={<Join />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />

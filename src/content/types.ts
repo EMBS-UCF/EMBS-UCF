@@ -23,21 +23,6 @@ export interface Project {
   order: number;
 }
 
-export interface ResourceItem {
-  label: string;
-  note: string;
-  /** Empty for entries that are not links — course areas, for instance. */
-  href: string;
-}
-
-export interface ResourceSection {
-  slug: string;
-  title: string;
-  description: string;
-  order: number;
-  items: ResourceItem[];
-}
-
 export interface SiteSettings {
   name: string;
   chapter: string;

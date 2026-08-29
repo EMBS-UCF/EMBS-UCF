@@ -169,49 +169,6 @@ collections:
         default: ""
 
   # -------------------------------------------------------------------------
-  - name: resources
-    label: Resources
-    label_singular: Resource section
-    folder: content/resources
-    create: true
-    extension: md
-    format: frontmatter
-    slug: "{{order}}-{{title}}"
-    summary: "{{title}}"
-    fields:
-      - { name: title, label: Section title, widget: string }
-      - name: description
-        label: Short description
-        widget: text
-        hint: One or two sentences, shown beside the list.
-      - { name: order, label: Display order, widget: number, value_type: int, default: 10 }
-
-      - name: items
-        label: Entries
-        widget: list
-        min: 1
-        label_singular: Entry
-        summary: "{{fields.label}}"
-        hint: >-
-          Each row can be a link or just a line of text. Leave the address empty
-          for things that are not links — a course to take, for instance.
-        fields:
-          - { name: label, label: Name, widget: string }
-          - name: note
-            label: Note
-            widget: string
-            required: false
-            default: ""
-            hint: One line explaining what it is or why it is worth your time.
-          - name: href
-            label: Address
-            widget: string
-            required: false
-            default: ""
-            pattern:
-              - "^$|^(https?://|/|mailto:).+"
-              - Leave empty, or start with https://, / or mailto:
-
   # -------------------------------------------------------------------------
   - name: pages
     label: Page text

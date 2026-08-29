@@ -72,16 +72,6 @@ export function metaForPath(path: string): PageMeta {
     };
   }
 
-  if (clean === "/resources") {
-    return {
-      title: pageTitle("Resources"),
-      description:
-        "Coursework, scholarships, research placements, and career resources for biomedical engineering students at UCF.",
-      path: clean,
-      image: DEFAULT_IMAGE,
-      type: "website",
-    };
-  }
 
   if (clean === "/join") {
     return {
@@ -175,7 +165,6 @@ export const ALL_STATIC_ROUTES: string[] = [
   "/projects",
   "/events",
   "/officers",
-  "/resources",
   "/join",
   "/contact",
 ];

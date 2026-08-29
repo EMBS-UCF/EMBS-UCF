@@ -5,7 +5,7 @@ import type { Plugin } from "vite";
  * Turns `.md` files into ES modules at build time.
  *
  * Only frontmatter is exposed. Nothing on the site renders a Markdown body any
- * more — projects, officers and resources are all structured fields — so there
+ * more — projects and officers are all structured fields — so there
  * is no renderer here and none ships to the browser.
  *
  * The files stay Markdown rather than YAML because the CMS writes them that

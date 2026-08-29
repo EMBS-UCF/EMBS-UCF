@@ -1,10 +1,4 @@
-import type {
-  Person,
-  Project,
-  ResourceItem,
-  ResourceSection,
-  SiteSettings,
-} from "./types";
+import type { Person, Project, SiteSettings } from "./types";
 
 import siteJson from "../../content/settings/site.json";
 import homeJson from "../../content/pages/home.json";
@@ -103,39 +97,6 @@ export const projects: Project[] = Object.entries(projectModules)
   .sort(byOrder);
 
 /* ------------------------------------------------------------------ *
- * Resources
- * ------------------------------------------------------------------ */
-
-const resourceModules = import.meta.glob<MdModule>("../../content/resources/*.md", {
-  eager: true,
-});
-
-export const resourceSections: ResourceSection[] = Object.entries(resourceModules)
-  .map(([path, mod]): ResourceSection => {
-    const fm = mod.frontmatter;
-    const rawItems = Array.isArray(fm.items) ? fm.items : [];
-    return {
-      slug: slugOf(path),
-      title: str(fm.title, "Untitled"),
-      description: str(fm.description),
-      order: num(fm.order),
-      items: rawItems
-        .map((item): ResourceItem => {
-          const i = (item ?? {}) as Record<string, unknown>;
-          return {
-            label: str(i.label),
-            note: str(i.note),
-            href: str(i.href),
-          };
-        })
-        // A row with no label is an unfinished edit. A row with no href is
-        // fine — that is how course areas are listed.
-        .filter((i) => i.label !== ""),
-    };
-  })
-  .sort(byOrder);
-
-/* ------------------------------------------------------------------ *
  * Settings and page copy
  * ------------------------------------------------------------------ */
 
@@ -145,4 +106,4 @@ export const joinCopy = joinJson;
 export const eventsCopy = eventsJson;
 export const contactCopy = contactJson;
 
-export type { Person, Project, ResourceItem, ResourceSection, SiteSettings } from "./types";
+export type { Person, Project, SiteSettings } from "./types";
