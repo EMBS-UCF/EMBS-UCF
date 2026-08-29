@@ -42,7 +42,8 @@ the admin panel under **Settings → Google Calendar**, so officers can change i
 without a developer.
 
 `.node-version` in the repo pins Node 22, so no `NODE_VERSION` variable is
-needed.
+needed. Vite 8 requires Node 20.19+ or 22.12+, so if you ever pin a specific
+patch there, keep it at or above 22.12.
 
 ### 3. Create the Pages project, if you need one
 
