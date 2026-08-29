@@ -10,7 +10,8 @@
   "email": "ieee.embs.ucf@gmail.com",
   "url": "https://embsucf.org",
   "assetBase": "https://assets.embsucf.org",
-  "logo": "https://assets.embsucf.org/logo.png",
+  "logo": "/logo.png",
+  "logoMark": "/logo-mark.png",
   "socials": {
     "discord": "https://discord.gg/GXjTNuCvka",
     "linkedin": "https://www.linkedin.com/company/ieee-embs-ucf/",

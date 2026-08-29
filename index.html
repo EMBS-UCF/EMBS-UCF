@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <!-- Browsers fetch the favicon on every page, so it points at the small
+         mark. The 512px file is only needed where something large is wanted. -->
+    <link rel="icon" type="image/png" href="/logo-mark.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
     <meta name="theme-color" content="#13161b" />
     <meta name="color-scheme" content="dark" />
 
     <link rel="preconnect" href="https://assets.embsucf.org" crossorigin />
+    <!-- Calendar is fetched after mount; resolve the host ahead of time. -->
+    <link rel="dns-prefetch" href="https://www.googleapis.com" />
 
     <!--app-head-->
   </head>

@@ -553,7 +553,18 @@ collections:
             widget: string
             hint: Used to build link previews and the sitemap. Do not change unless the domain changes.
           - { name: assetBase, label: Image host, widget: string }
-          - { name: logo, label: Logo URL, widget: string }
+          - name: logo
+            label: Social card image
+            widget: string
+            hint: >-
+              Square image used for the favicon and for link previews. A path
+              like /logo.png is served from the site itself.
+          - name: logoMark
+            label: Header logo
+            widget: string
+            hint: >-
+              Shown at 32 pixels in the header and footer, so it should be a
+              small file. Do not point this at a large photograph.
 
           - name: socials
             label: Social links

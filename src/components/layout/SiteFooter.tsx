@@ -25,7 +25,7 @@ export function SiteFooter() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3">
               <img
-                src={site.logo}
+                src={site.logoMark}
                 alt=""
                 width={32}
                 height={32}

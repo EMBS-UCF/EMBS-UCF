@@ -51,7 +51,10 @@ export interface SiteSettings {
   email: string;
   url: string;
   assetBase: string;
+  /** Square image for social cards and the favicon. May be a path or a URL. */
   logo: string;
+  /** Small mark for the header and footer, shown at 32px. */
+  logoMark: string;
   socials: {
     discord: string;
     linkedin: string;

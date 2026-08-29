@@ -20,7 +20,7 @@ const absolute = (path: string): string => {
   return new URL(clean, site.url).toString();
 };
 
-const DEFAULT_IMAGE = site.logo;
+const DEFAULT_IMAGE = new URL(site.logo, site.url).toString();
 
 /** Appends the chapter name unless the page is the home page. */
 export const pageTitle = (title: string, isHome = false): string =>
@@ -151,7 +151,7 @@ export function organizationJsonLd(): string {
     name: site.fullName,
     alternateName: site.shortName,
     url: site.url,
-    logo: site.logo,
+    logo: DEFAULT_IMAGE,
     foundingDate: site.founded,
     email: site.email,
     description: homeCopy.seo.description,

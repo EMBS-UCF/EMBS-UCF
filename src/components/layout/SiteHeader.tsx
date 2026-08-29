@@ -53,7 +53,7 @@ export function SiteHeader() {
             aria-label={`${site.shortName} — home`}
           >
             <img
-              src={site.logo}
+              src={site.logoMark}
               alt=""
               width={32}
               height={32}

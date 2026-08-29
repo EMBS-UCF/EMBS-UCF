@@ -14,7 +14,7 @@
  * actual 404 status rather than a soft 200.
  */
 
-import { mkdirSync, readFileSync, writeFileSync, rmSync, existsSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, writeFileSync, rmSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -25,6 +25,40 @@ const serverDir = join(dist, "server");
 const { render, routes } = await import(join(serverDir, "entry-server.js"));
 
 const template = readFileSync(join(dist, "index.html"), "utf8");
+
+/**
+ * Fonts are only discovered after the stylesheet parses, which delays the two
+ * faces that draw the headline and body text. Preloading them removes a round
+ * trip. Filenames are content-hashed, so they have to be looked up here rather
+ * than hard-coded.
+ *
+ * Only the Latin subsets of the two above-the-fold faces are preloaded —
+ * preloading everything would just move the contention around.
+ */
+const assets = readdirSync(join(dist, "assets"));
+
+const fontPreloads = ["inter-latin-wght-normal", "instrument-serif-latin-400-normal"]
+  .map((stem) => assets.find((f) => f.startsWith(stem) && f.endsWith(".woff2")))
+  .filter(Boolean)
+  .map(
+    (file) =>
+      `<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/${file}" />`,
+  )
+  .join("\n    ");
+
+/**
+ * The first slide of the home page slideshow is the largest contentful paint.
+ * It is inside a component the browser cannot see until the JavaScript runs,
+ * so without this the fetch does not start until hydration.
+ */
+function imagePreloadFor(route) {
+  if (route !== "/") return "";
+  const home = JSON.parse(readFileSync(join(root, "content/pages/home.json"), "utf8"));
+  const first = home.hero?.slides?.[0]?.src;
+  return first
+    ? `<link rel="preload" as="image" fetchpriority="high" href="${first}" />`
+    : "";
+}
 
 if (!template.includes("<!--app-html-->") || !template.includes("<!--app-head-->")) {
   console.error("  index.html is missing its <!--app-html--> / <!--app-head--> markers.");
@@ -44,7 +78,10 @@ const write = (route, html) => {
 
 const buildPage = (route) => {
   const { html, head } = render(route);
-  return template.replace("<!--app-head-->", head).replace("<!--app-html-->", html);
+  const preloads = [fontPreloads, imagePreloadFor(route)].filter(Boolean).join("\n    ");
+  return template
+    .replace("<!--app-head-->", `${preloads}\n    ${head}`)
+    .replace("<!--app-html-->", html);
 };
 
 const allRoutes = [...routes, "/404"];

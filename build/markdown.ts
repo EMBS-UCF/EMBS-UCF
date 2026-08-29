@@ -1,70 +1,29 @@
 import matter from "gray-matter";
-import { Marked } from "marked";
 import type { Plugin } from "vite";
 
 /**
  * Turns `.md` files into ES modules at build time.
  *
- * Frontmatter is parsed and Markdown is rendered to HTML here, in Node, so the
- * browser bundle never carries a Markdown parser. Officers editing content in
- * the CMS write Markdown; the site only ever sees finished HTML.
+ * Only frontmatter is exposed. Nothing on the site renders a Markdown body any
+ * more — projects, officers and resources are all structured fields — so there
+ * is no renderer here and none ships to the browser.
+ *
+ * The files stay Markdown rather than YAML because the CMS writes them that
+ * way, and because it keeps the door open to adding prose later without
+ * migrating the content directory.
  */
-
-const marked = new Marked({ gfm: true, breaks: false });
-
-marked.use({
-  renderer: {
-    link({ href, title, text }) {
-      const external = /^https?:\/\//.test(href);
-      const attrs = [
-        `href="${href}"`,
-        title ? `title="${title}"` : "",
-        external ? 'target="_blank" rel="noopener noreferrer"' : "",
-      ]
-        .filter(Boolean)
-        .join(" ");
-      return `<a ${attrs}>${text}</a>`;
-    },
-    image({ href, title, text }) {
-      const attrs = [
-        `src="${href}"`,
-        `alt="${text ?? ""}"`,
-        title ? `title="${title}"` : "",
-        'loading="lazy"',
-        'decoding="async"',
-      ]
-        .filter(Boolean)
-        .join(" ");
-      return `<img ${attrs} />`;
-    },
-  },
-});
-
 export function markdownPlugin(): Plugin {
   return {
     name: "embs:markdown",
     enforce: "pre",
 
-    async transform(code, id) {
+    transform(code, id) {
       if (!id.endsWith(".md")) return null;
 
-      const { data, content } = matter(code);
-      const html = await marked.parse(content);
-      const plain = content
-        .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
-        .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
-        .replace(/[#*_`>~-]/g, "")
-        .replace(/\s+/g, " ")
-        .trim();
+      const { data } = matter(code);
 
       return {
-        code: [
-          `export const frontmatter = ${JSON.stringify(data)};`,
-          `export const html = ${JSON.stringify(html)};`,
-          `export const raw = ${JSON.stringify(content)};`,
-          `export const plain = ${JSON.stringify(plain)};`,
-          `export default { frontmatter, html, raw, plain };`,
-        ].join("\n"),
+        code: `export const frontmatter = ${JSON.stringify(data)};\nexport default { frontmatter };`,
         map: null,
       };
     },

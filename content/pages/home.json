@@ -18,6 +18,11 @@
     },
     "slides": [
       {
+        "src": "https://assets.embsucf.org/project_photo.jpg",
+        "alt": "Close-up of two hands fixing copper tape to a cardboard panel at a workshop bench, with a wired-up breadboard and microcontroller alongside.",
+        "caption": ""
+      },
+      {
         "src": "https://assets.embsucf.org/gbm_photo.jpg",
         "alt": "A speaker presenting EEG research at a general body meeting, gesturing at a projected slide of scalp activity maps while members watch from their desks.",
         "caption": ""
@@ -25,11 +30,6 @@
       {
         "src": "https://assets.embsucf.org/gbm_photo2.jpg",
         "alt": "Members in a UCF lecture hall watching a faculty talk titled “Understanding the neural control of two hands”.",
-        "caption": ""
-      },
-      {
-        "src": "https://assets.embsucf.org/project_photo.jpg",
-        "alt": "Close-up of two hands fixing copper tape to a cardboard panel at a workshop bench, with a wired-up breadboard and microcontroller alongside.",
         "caption": ""
       }
     ]

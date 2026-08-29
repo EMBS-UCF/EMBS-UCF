@@ -146,7 +146,7 @@ for (const { file, data } of readCollection("resources")) {
 const settings = readJson("settings/site.json");
 if (settings) {
   const { file, data } = settings;
-  for (const key of ["name", "shortName", "email", "url", "logo", "tagline", "founded"]) {
+  for (const key of ["name", "shortName", "email", "url", "logo", "logoMark", "tagline", "founded"]) {
     if (!isFilledString(data[key])) report(file, `\`${key}\` is required.`);
   }
   if (data.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email))

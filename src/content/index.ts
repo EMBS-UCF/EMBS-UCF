@@ -14,8 +14,6 @@ import contactJson from "../../content/pages/contact.json";
 
 interface MdModule {
   frontmatter: Record<string, unknown>;
-  html: string;
-  plain: string;
 }
 
 /* ------------------------------------------------------------------ *

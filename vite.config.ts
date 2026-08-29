@@ -17,7 +17,9 @@ export default defineConfig({
   build: {
     target: "es2022",
     cssTarget: "chrome111",
-    sourcemap: true,
+    // 1.4 MB of maps that no error reporter consumes and no browser fetches.
+    // The repository is public, so they add nothing a debugger could not get.
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks(id) {
