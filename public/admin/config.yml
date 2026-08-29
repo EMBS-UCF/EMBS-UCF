@@ -13,7 +13,7 @@ backend:
   branch: master
   # Points at the Cloudflare Worker that handles "Log in with GitHub".
   # See docs/CMS-SETUP.md for how this is deployed.
-  base_url: https://embs-cms-auth.embsucf.workers.dev
+  base_url: https://sveltia-cms-auth.ieee-embs-ucf.workers.dev
 
 # Lets the editor open the files on this computer instead of going through
 # GitHub, so the admin panel can be worked on before the login worker exists.

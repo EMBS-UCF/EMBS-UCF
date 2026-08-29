@@ -80,7 +80,7 @@ need the full path ending in `/index.html`. On the built site the plain
    | --- | --- |
    | Application name | `EMBS UCF Site Editor` |
    | Homepage URL | `https://embsucf.org` |
-   | Authorization callback URL | `https://embs-cms-auth.embsucf.workers.dev/callback` |
+   | Authorization callback URL | `https://sveltia-cms-auth.ieee-embs-ucf.workers.dev/callback` |
 
 3. Generate a client secret. Copy both the **Client ID** and the
    **Client Secret** now — GitHub will not show the secret again.
@@ -95,8 +95,8 @@ cd sveltia-cms-auth
 npx wrangler deploy
 ```
 
-Name the worker `embs-cms-auth` when prompted, so the URL matches the callback
-above.
+It deploys as `sveltia-cms-auth`. Note the URL it prints — the callback you
+register in the next step has to match it exactly.
 
 ## 3. Give the worker its secrets
 
@@ -125,7 +125,7 @@ backend:
   name: github
   repo: EMBS-UCF/EMBS-UCF
   branch: master
-  base_url: https://embs-cms-auth.embsucf.workers.dev
+  base_url: https://sveltia-cms-auth.ieee-embs-ucf.workers.dev
 ```
 
 If you deployed the worker under a different name, change it here.
