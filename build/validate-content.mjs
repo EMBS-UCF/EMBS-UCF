@@ -73,12 +73,42 @@ for (const { file, data } of readCollection("advisors")) {
 
 /* --------------------------- projects --------------------------- */
 
+/**
+ * Timing statements go stale and nobody comes back to fix them. A project
+ * described as "forming now" is still forming now two years later. Timing
+ * belongs in `meeting`, which is a field officers already expect to change.
+ */
+const STALE_PHRASES = [
+  "forming now",
+  "starting soon",
+  "coming soon",
+  "just started",
+  "just formed",
+  "recently started",
+  "right now",
+  "at the moment",
+  "as of now",
+  "this semester we",
+  "new project",
+];
+
 const projectSlugs = new Set();
 
 for (const { file, data } of readCollection("projects")) {
   if (!isFilledString(data.title)) report(file, "`title` is required.");
   if (!isFilledString(data.summary))
     report(file, "`summary` is required — it is the one-line description shown on project cards.");
+  if (isFilledString(data.summary)) {
+    const lower = data.summary.toLowerCase();
+    for (const phrase of STALE_PHRASES) {
+      if (lower.includes(phrase)) {
+        report(
+          file,
+          `\`summary\` contains "${phrase}". Timing statements go stale and never get updated — put schedule information in the \`meeting\` field instead, and keep the summary to what the project is and what you would learn.`,
+        );
+      }
+    }
+  }
   if (data.summary && data.summary.length > 400)
     report(
       file,

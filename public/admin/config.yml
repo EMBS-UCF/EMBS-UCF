@@ -59,6 +59,10 @@ collections:
           numbers — "a device that picks up brain activity through the scalp"
           lands; "instrumentation amplifier, filter stages, ADC" does not.
 
+          Do not put timing here. "The team is forming now" is wrong within a
+          month and nobody comes back to fix it, so the build will reject it.
+          Schedule goes in the field below, which is meant to change.
+
       - name: order
         label: Display order
         widget: number
