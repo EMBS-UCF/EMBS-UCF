@@ -1,8 +1,9 @@
 ---
-name: Samuel Lane
+name: Santino Maiorino
 role: Workshop Chair
-major: Electrical Engineering
-photo: https://assets.embsucf.org/samuel.jpg
-linkedin: ""
+major: Materials Science and Engineering
 order: 5
+photo: https://assets.embsucf.org/sonny.jpg
+linkedin: https://www.linkedin.com/in/santino-maiorino
 ---
+
