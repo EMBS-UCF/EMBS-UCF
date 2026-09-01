@@ -1,8 +1,9 @@
 ---
-name: Rachel Ostrow
+name: Kevin Maa
 role: Treasurer
-major: Photonics Engineering
-photo: https://assets.embsucf.org/rachel.jpg
-linkedin: https://www.linkedin.com/in/rachel-ostrow-006b2a32a/
+major: ''
 order: 3
+photo: ''
+linkedin: ''
 ---
+
