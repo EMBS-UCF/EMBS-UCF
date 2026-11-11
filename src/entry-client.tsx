@@ -20,7 +20,7 @@ const tree = (
 
 // Prerendered pages arrive with markup already in place and are hydrated.
 // `npm run dev` serves an empty shell, so fall back to a fresh render.
-if (container.hasChildNodes()) {
+if (container.firstElementChild) {
   hydrateRoot(container, tree);
 } else {
   createRoot(container).render(tree);

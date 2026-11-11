@@ -8,7 +8,6 @@ import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { Waveform } from "@/components/ui/Waveform";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { EventList } from "@/components/ui/EventList";
 import { Slideshow } from "@/components/ui/Slideshow";
@@ -69,9 +68,6 @@ function Hero() {
           )}
         </div>
 
-        <Reveal delay={260} className="mt-16 text-accent sm:mt-20">
-          <Waveform className="h-14 sm:h-16" />
-        </Reveal>
       </Container>
     </section>
   );
@@ -159,16 +155,10 @@ function Pillars() {
       heading={pillarSection.heading}
       lede={pillarSection.lede}
     >
-      <ul className="grid gap-px overflow-hidden rounded-card border border-line bg-line md:grid-cols-3">
+      <ul className="grid gap-x-10 gap-y-12 md:grid-cols-3">
         {pillarSection.pillars.map((pillar, i) => (
-          <Reveal as="li" key={pillar.title} delay={i * 70} className="bg-surface p-7 sm:p-8">
-            <span
-              className="font-mono text-[0.6875rem] tracking-[0.14em] text-faint"
-              aria-hidden="true"
-            >
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3 className="mt-4 font-display text-2xl leading-tight text-ink">
+          <Reveal as="li" key={pillar.title} delay={i * 70} className="border-t border-line-strong pt-6">
+            <h3 className="font-display text-2xl leading-tight text-ink">
               {pillar.title}
             </h3>
             <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">{pillar.body}</p>
@@ -196,7 +186,7 @@ function JoinSteps() {
               className="absolute -left-px top-8 h-px w-4 bg-line-strong"
               aria-hidden="true"
             />
-            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-accent-text">
+            <span className="text-sm font-medium text-accent-text">
               Step {i + 1}
             </span>
             <h3 className="mt-2.5 font-display text-2xl leading-tight text-ink">
@@ -215,7 +205,7 @@ function Closing() {
 
   return (
     <Section width="wide" className="pb-24 sm:pb-32">
-      <Reveal className="relative overflow-hidden rounded-card border border-line bg-surface px-7 py-14 sm:px-14 sm:py-20">
+      <Reveal className="relative overflow-hidden border-t border-line-strong pt-14 sm:pt-20">
         <div className="relative max-w-2xl">
           <h2 className="font-display text-display-2 text-ink">{closing.heading}</h2>
           <p className="mt-5 text-lede text-muted">{closing.body}</p>
@@ -228,17 +218,11 @@ function Closing() {
               {closing.secondaryCta.label}
             </ButtonLink>
           </div>
-          <p className="mt-8 font-mono text-xs text-faint">
+          <p className="mt-8 text-sm text-faint">
             Or email {site.email} — it reaches the officers directly.
           </p>
         </div>
 
-        <div
-          className="pointer-events-none absolute -right-20 -bottom-24 w-[36rem] text-accent opacity-[0.06]"
-          aria-hidden="true"
-        >
-          <Waveform className="h-64" weight={2} animated={false} />
-        </div>
       </Reveal>
     </Section>
   );

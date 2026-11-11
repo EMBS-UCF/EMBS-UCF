@@ -21,7 +21,7 @@ export function RootLayout() {
       <Seo />
       <a
         href="#main"
-        className="sr-only rounded-full bg-accent px-4 py-2 text-sm font-medium text-on-accent focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60]"
+        className="sr-only bg-accent px-4 py-2 text-sm font-medium text-on-accent focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60]"
       >
         Skip to content
       </a>

@@ -25,16 +25,10 @@ export default function Join() {
       </PageHeader>
 
       <Section width="wide" eyebrow="Getting started" heading="How to get involved">
-        <ol className="grid gap-px overflow-hidden rounded-card border border-line bg-line md:grid-cols-3">
+        <ol className="grid gap-x-10 gap-y-12 md:grid-cols-3">
           {joinSection.steps.map((step, i) => (
-            <Reveal as="li" key={step.title} delay={i * 70} className="bg-surface p-7 sm:p-8">
-              <span
-                className="font-mono text-[0.6875rem] tracking-[0.14em] text-faint"
-                aria-hidden="true"
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-4 font-display text-2xl leading-tight text-ink">
+            <Reveal as="li" key={step.title} delay={i * 70} className="border-t border-line-strong pt-6">
+              <h3 className="font-display text-2xl leading-tight text-ink">
                 {step.title}
               </h3>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">{step.body}</p>
@@ -42,7 +36,7 @@ export default function Join() {
           ))}
         </ol>
 
-        <Reveal className="mt-10 max-w-2xl rounded-card border border-line bg-surface-sunk p-7">
+        <Reveal className="mt-12 max-w-2xl border-l-2 border-accent pl-6">
           <h3 className="font-medium text-ink">{steps.heading}</h3>
           <p className="mt-2.5 leading-relaxed text-muted">{steps.body}</p>
         </Reveal>
@@ -61,13 +55,13 @@ export default function Join() {
           </Reveal>
         )}
 
-        <ul className="grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2">
+        <ul className="grid gap-x-10 gap-y-12 sm:grid-cols-2">
           {membership.benefits.map((benefit, i) => (
             <Reveal
               as="li"
               key={benefit.title}
               delay={(i % 2) * 70}
-              className="bg-surface p-7 sm:p-8"
+              className="border-t border-line-strong pt-6"
             >
               <h3 className="font-display text-2xl leading-tight text-ink">
                 {benefit.title}
@@ -80,7 +74,7 @@ export default function Join() {
         </ul>
 
         <Reveal className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-md font-mono text-xs leading-relaxed text-faint">
+          <p className="max-w-md text-sm leading-relaxed text-faint">
             {membership.note}
           </p>
           <ButtonLink to={membership.cta.href} size="lg" className="self-start">

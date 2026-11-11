@@ -43,7 +43,7 @@ export function metaForPath(path: string): PageMeta {
     return {
       title: pageTitle("Projects"),
       description:
-        "The hardware teams running at IEEE EMBS UCF — a student-built oxygen concentrator and an EEG acquisition stack built from the electrodes up.",
+        "The hardware teams running at IEEE EMBS UCF: an EMG-controlled prosthetic arm and an EEG built from the electrodes up.",
       path: clean,
       image: DEFAULT_IMAGE,
       type: "website",

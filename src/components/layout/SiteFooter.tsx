@@ -4,7 +4,6 @@ import { site } from "@/content";
 import { NAV_ITEMS } from "@/lib/nav";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Waveform } from "@/components/ui/Waveform";
 
 const SOCIALS = [
   { label: "Discord", href: site.socials.discord, Icon: MessageSquare },
@@ -16,10 +15,6 @@ const SOCIALS = [
 export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-line bg-surface-sunk">
-      <div className="text-accent/40" aria-hidden="true">
-        <Waveform className="h-10" weight={1} animated={false} />
-      </div>
-
       <Container width="wide">
         <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
@@ -40,7 +35,7 @@ export function SiteFooter() {
             </p>
             <a
               href={`mailto:${site.email}`}
-              className="mt-4 inline-block font-mono text-sm text-accent-text underline decoration-1 underline-offset-4 hover:no-underline"
+              className="mt-4 inline-block text-sm text-accent-text underline decoration-1 underline-offset-4 hover:no-underline"
             >
               {site.email}
             </a>
@@ -85,10 +80,10 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-4 border-t border-line py-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-xs text-faint">
+          <p className="text-xs text-faint">
             © {new Date().getFullYear()} {site.fullName}
           </p>
-          <p className="max-w-md font-mono text-xs leading-relaxed text-faint">
+          <p className="max-w-md text-xs leading-relaxed text-faint">
             A student branch chapter of the IEEE Engineering in Medicine and Biology
             Society. Founded {site.founded}.
           </p>

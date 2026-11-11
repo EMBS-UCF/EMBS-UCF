@@ -5,21 +5,24 @@ import { cn } from "@/lib/cn";
 type Variant = "primary" | "secondary" | "ghost";
 type Size = "md" | "lg";
 
+// Only the primary action is a filled shape, and a square one. Everything
+// else reads as a link: underlined text, no outline or pill around it.
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium " +
-  "transition-[background-color,border-color,color,transform] duration-200 " +
-  "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap";
+  "inline-flex items-center gap-2 font-medium " +
+  "transition-[background-color,color,text-decoration-color] duration-200 " +
+  "disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-on-accent hover:bg-accent-hover",
+  primary: "justify-center rounded-[2px] bg-accent text-on-accent hover:bg-accent-hover",
   secondary:
-    "border border-line-strong text-ink hover:border-ink hover:bg-surface-raised",
-  ghost: "text-muted hover:text-ink hover:bg-surface-raised",
+    "text-ink underline decoration-line-strong decoration-1 underline-offset-[6px] hover:decoration-ink",
+  ghost: "text-muted underline-offset-[6px] hover:text-ink hover:underline",
 };
 
-const sizes: Record<Size, string> = {
-  md: "h-10 px-5 text-sm",
-  lg: "h-12 px-7 text-[0.9375rem]",
+const sizes: Record<Variant, Record<Size, string>> = {
+  primary: { md: "h-10 px-5 text-sm", lg: "h-12 px-7 text-[0.9375rem]" },
+  secondary: { md: "h-10 text-sm", lg: "h-12 text-[0.9375rem]" },
+  ghost: { md: "h-10 text-sm", lg: "h-12 text-[0.9375rem]" },
 };
 
 interface CommonProps {
@@ -40,7 +43,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   return (
-    <button className={cn(base, variants[variant], sizes[size], className)} {...rest}>
+    <button className={cn(base, variants[variant], sizes[variant][size], className)} {...rest}>
       {children}
     </button>
   );
@@ -62,7 +65,7 @@ export function ButtonLink({
   children,
   ...rest
 }: ButtonLinkProps) {
-  const classes = cn(base, variants[variant], sizes[size], className);
+  const classes = cn(base, variants[variant], sizes[variant][size], className);
   const isExternal = external ?? /^(https?:|mailto:|tel:)/.test(to);
 
   if (isExternal) {

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-/** Small monospace label above a heading. Carries the technical register. */
+/** Short label above a heading, in the body font and sentence case. */
 export function Eyebrow({
   children,
   className,
@@ -14,7 +14,7 @@ export function Eyebrow({
   return (
     <Tag
       className={cn(
-        "font-mono text-label font-medium uppercase tracking-[0.14em] text-faint",
+        "text-sm font-medium text-accent-text",
         className,
       )}
     >

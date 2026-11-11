@@ -5,8 +5,7 @@ export function Tag({ children, className }: { children: ReactNode; className?: 
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border border-line px-2.5 py-1",
-        "font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-faint",
+        "inline-flex items-center text-xs text-faint",
         className,
       )}
     >
@@ -17,7 +16,7 @@ export function Tag({ children, className }: { children: ReactNode; className?: 
 
 export function StatusDot({ live, label }: { live: boolean; label: string }) {
   return (
-    <span className="inline-flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.1em]">
+    <span className="inline-flex items-center gap-2 text-xs">
       <span className="relative flex size-1.5">
         {live && (
           <span className="absolute inline-flex size-full animate-ping rounded-full bg-live opacity-60" />

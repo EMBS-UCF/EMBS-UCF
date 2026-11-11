@@ -5,7 +5,7 @@ import { Avatar } from "./Avatar";
 export function PersonCard({ person }: { person: Person }) {
   return (
     <article className="group">
-      <div className="aspect-4/5 overflow-hidden rounded-card border border-line bg-surface-sunk">
+      <div className="aspect-4/5 overflow-hidden bg-surface-sunk">
         <Avatar
           src={person.photo}
           name={person.name}
@@ -14,7 +14,7 @@ export function PersonCard({ person }: { person: Person }) {
       </div>
 
       <div className="mt-4">
-        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-text">
+        <p className="text-sm font-medium text-accent-text">
           {person.role}
         </p>
         <h3 className="mt-1.5 text-lg font-medium tracking-tight text-ink">

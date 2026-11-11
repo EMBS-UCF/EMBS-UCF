@@ -103,7 +103,7 @@ export function Slideshow({ slides, interval = 4500, className }: SlideshowProps
       }}
       onKeyDown={onKeyDown}
     >
-      <div className="relative aspect-3/4 overflow-hidden rounded-card border border-line bg-surface-sunk">
+      <div className="relative aspect-3/4 overflow-hidden bg-surface-sunk">
         {slides.map((slide, i) => (
           <figure
             key={slide.src}
@@ -140,8 +140,8 @@ export function Slideshow({ slides, interval = 4500, className }: SlideshowProps
                   aria-label={`Show photo ${i + 1} of ${count}`}
                   aria-current={i === index ? "true" : undefined}
                   className={cn(
-                    "h-1.5 rounded-full transition-all duration-300",
-                    i === index ? "w-6 bg-white" : "w-1.5 bg-white/45 hover:bg-white/70",
+                    "h-0.5 transition-all duration-300",
+                    i === index ? "w-8 bg-white" : "w-4 bg-white/45 hover:bg-white/70",
                   )}
                 />
               ))}
@@ -173,7 +173,7 @@ export function Slideshow({ slides, interval = 4500, className }: SlideshowProps
       </p>
 
       {current?.caption && (
-        <p className="mt-3 font-mono text-xs text-faint">{current.caption}</p>
+        <p className="mt-3 text-sm text-faint">{current.caption}</p>
       )}
     </div>
   );
@@ -193,7 +193,7 @@ function SlideButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="grid size-7 place-items-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+      className="grid size-8 place-items-center text-white/80 transition-colors hover:text-white"
     >
       {children}
     </button>

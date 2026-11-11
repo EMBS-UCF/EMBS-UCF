@@ -36,18 +36,13 @@ export function Countdown({ target }: { target: number }) {
   ];
 
   return (
-    <div className="flex gap-2 sm:gap-3" role="timer" aria-live="off">
+    <div className="flex items-baseline gap-6 sm:gap-8" role="timer" aria-live="off">
       {units.map(([label, value]) => (
-        <div
-          key={label}
-          className="flex min-w-14 flex-col items-center rounded-card border border-line bg-surface px-3 py-2.5 sm:min-w-16"
-        >
-          <span className="font-display text-2xl leading-none tabular-nums text-ink sm:text-3xl">
+        <div key={label} className="flex items-baseline gap-1.5">
+          <span className="font-display text-4xl leading-none tabular-nums text-ink sm:text-5xl">
             {String(value).padStart(2, "0")}
           </span>
-          <span className="mt-1.5 font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-faint">
-            {label}
-          </span>
+          <span className="text-sm text-faint">{label}</span>
         </div>
       ))}
     </div>

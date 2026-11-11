@@ -39,7 +39,7 @@ export function PhotoBand({
     <figure className={cn("group", className)}>
       <div
         className={cn(
-          "overflow-hidden rounded-card border border-line bg-surface-sunk",
+          "overflow-hidden bg-surface-sunk",
           ratios[ratio],
         )}
       >
@@ -53,7 +53,7 @@ export function PhotoBand({
         />
       </div>
       {photo.caption && (
-        <figcaption className="mt-3 font-mono text-xs text-faint">
+        <figcaption className="mt-3 text-sm text-faint">
           {photo.caption}
         </figcaption>
       )}

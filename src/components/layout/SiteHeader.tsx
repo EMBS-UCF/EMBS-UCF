@@ -63,7 +63,7 @@ export function SiteHeader() {
               <span className="text-[0.9375rem] font-semibold tracking-tight text-ink">
                 {site.name}
               </span>
-              <span className="mt-0.5 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-faint">
+              <span className="mt-0.5 text-xs text-faint">
                 {site.chapter}
               </span>
             </span>
@@ -76,10 +76,8 @@ export function SiteHeader() {
                 to={item.path}
                 className={({ isActive }) =>
                   cn(
-                    "rounded-full px-3.5 py-2 text-sm transition-colors",
-                    isActive
-                      ? "text-ink"
-                      : "text-muted hover:bg-surface-raised hover:text-ink",
+                    "px-3.5 py-2 text-sm transition-colors",
+                    isActive ? "text-ink" : "text-muted hover:text-ink",
                   )
                 }
               >
@@ -102,7 +100,7 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
-              className="grid size-9 place-items-center rounded-full border border-line text-muted lg:hidden"
+              className="grid size-9 place-items-center text-muted hover:text-ink lg:hidden"
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
               aria-label={menuOpen ? "Close menu" : "Open menu"}

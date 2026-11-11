@@ -1,7 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Waveform } from "@/components/ui/Waveform";
 import { NAV_ITEMS } from "@/lib/nav";
 import { Link } from "react-router-dom";
 
@@ -30,7 +29,7 @@ export default function NotFound() {
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className="font-mono text-xs uppercase tracking-[0.1em] text-faint transition-colors hover:text-ink"
+                  className="text-sm text-faint transition-colors hover:text-ink"
                 >
                   {item.label}
                 </Link>
@@ -38,10 +37,6 @@ export default function NotFound() {
             ))}
           </ul>
         </nav>
-
-        <div className="mt-16 text-faint opacity-40" aria-hidden="true">
-          <Waveform className="h-12" weight={1} animated={false} />
-        </div>
       </div>
     </Container>
   );

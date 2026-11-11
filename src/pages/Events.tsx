@@ -35,7 +35,7 @@ export default function Events() {
 
       {nextGbm && (
         <Section width="wide" className="py-12 sm:py-16">
-          <Reveal className="rounded-card border border-line bg-surface p-7 sm:p-10">
+          <Reveal className="border-y border-line-strong py-10 sm:py-12">
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <div className="min-w-0">
                 <Eyebrow>Next meeting</Eyebrow>
@@ -74,9 +74,9 @@ export default function Events() {
 
           <Reveal delay={80}>
             <Eyebrow as="h3">Kinds of event</Eyebrow>
-            <dl className="mt-6 space-y-px overflow-hidden rounded-card border border-line bg-line">
+            <dl className="mt-6 divide-y divide-line border-y border-line">
               {kinds.map((kind) => (
-                <div key={kind.title} className="bg-surface p-6">
+                <div key={kind.title} className="py-5">
                   <dt className="font-medium text-ink">{kind.title}</dt>
                   <dd className="mt-1.5 text-[0.9375rem] leading-relaxed text-muted">
                     {kind.body}
@@ -90,20 +90,20 @@ export default function Events() {
 
       <Section divider width="wide" eyebrow="Full schedule" heading="Chapter calendar" className="pb-24 sm:pb-32">
         {calendarIsConfigured() ? (
-          <Reveal className="overflow-hidden rounded-card border border-line bg-surface p-1.5">
+          <Reveal className="border-t border-line-strong pt-6">
             <iframe
               src={calendarEmbedUrl()}
               title="IEEE EMBS at UCF chapter calendar"
               loading="lazy"
-              className="h-[36rem] w-full rounded-[calc(var(--radius-card)-0.25rem)] border-0"
+              className="h-[36rem] w-full border-0"
             />
           </Reveal>
         ) : (
-          <Reveal className="rounded-card border border-dashed border-line-strong p-10 text-center">
+          <Reveal className="border-t border-line-strong pt-8">
             <p className="text-muted">
               The chapter calendar isn't connected yet.
             </p>
-            <p className="mx-auto mt-2 max-w-md font-mono text-xs leading-relaxed text-faint">
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-faint">
               An officer can add the calendar ID under Settings in the admin panel,
               and set VITE_GOOGLE_API_KEY in the Cloudflare Pages environment.
             </p>

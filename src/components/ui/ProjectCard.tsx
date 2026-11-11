@@ -18,9 +18,9 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, headingLevel: Heading = "h3" }: ProjectCardProps) {
   return (
-    <Card as="article" className="flex h-full flex-col overflow-hidden">
+    <Card as="article" className="flex h-full flex-col">
       {project.cover && (
-        <div className="aspect-16/9 overflow-hidden border-b border-line bg-surface-sunk">
+        <div className="mt-6 aspect-16/9 overflow-hidden bg-surface-sunk">
           <img
             src={project.cover}
             alt=""
@@ -31,7 +31,7 @@ export function ProjectCard({ project, headingLevel: Heading = "h3" }: ProjectCa
         </div>
       )}
 
-      <div className="flex flex-1 flex-col p-7 sm:p-8">
+      <div className="flex flex-1 flex-col pt-6">
         <Heading className="font-display text-2xl leading-tight text-ink">
           {project.title}
         </Heading>
@@ -41,8 +41,8 @@ export function ProjectCard({ project, headingLevel: Heading = "h3" }: ProjectCa
         </p>
 
         {project.meeting && (
-          <dl className="mt-6 flex gap-2 border-t border-line pt-5 font-mono text-xs">
-            <dt className="shrink-0 uppercase tracking-[0.08em] text-faint">Meets</dt>
+          <dl className="mt-5 flex gap-2 text-sm">
+            <dt className="shrink-0 text-faint">Meets</dt>
             <dd className="text-muted">{project.meeting}</dd>
           </dl>
         )}
